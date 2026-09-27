@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dawah Reference Guide</title>
+<style>
+:root {
+  --teal:       #0f766e;
+  --teal-dark:  #0d5c56;
+  --teal-light: #14b8a6;
+  --teal-bg:    #f0fdfa;
+  --gold:       #d97706;
+  --gold-light: #fef3c7;
+  --gold-border:#fde68a;
+  --cream:      #fffdf7;
+  --warm-bg:    #f9f7f4;
+  --card-bg:    #ffffff;
+  --body:       #1c2b2a;
+  --muted:      #6b7280;
+  --soft-blue:  #1e40af;
+  --sidebar-w:  290px;
+  --header-h:   60px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--warm-bg);
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* HEADER */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--header-h);
+  background: var(--teal-dark);
+  display: flex; align-items: center;
+  padding: 0 1.25rem; gap: 1rem;
+  box-shadow: 0 2px 16px rgba(13,92,86,0.35);
+}
+.logo { display: flex; align-items: center; gap: 0.7rem; flex: 1; min-width: 0; }
+.logo-icon {
+  width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; font-weight: 800; color: #1c1c00;
+}
+.logo-text { color: white; font-size: 1rem; font-weight: 700; line-height: 1.2; }
+.logo-sub { color: rgba(255,255,255,0.55); font-size: 0.75rem; }
+.search-wrap { flex: 1; max-width: 340px; position: relative; }
+.search-wrap input {
+  width: 100%;
+  padding: 0.45rem 1rem 0.45rem 2rem;
+  border-radius: 20px; border: none;
+  background: rgba(255,255,255,0.14);
+  color: white; font-size: 0.875rem; outline: none;
+}
+.search-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+.search-wrap input:focus { background: rgba(255,255,255,0.22); }
+.search-icon { position: absolute; left: 0.65rem; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.45); font-size: 13px; pointer-events: none; }
+.menu-btn { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; line-height: 1; }
+
+/* LAYOUT */
+.layout { display: flex; margin-top: var(--header-h); min-height: calc(100vh - var(--header-h)); }
+
+/* SIDEBAR */
+.sidebar {
+  width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--teal-dark);
+  position: fixed; top: var(--header-h); left: 0; bottom: 0;
+  overflow-y: auto; z-index: 100;
+  padding: 1.2rem 0 3rem;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.12) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); }
+.sidebar-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 1rem 1.2rem 0.35rem;
+}
+.nav-q {
+  display: flex; align-items: flex-start; gap: 0.55rem;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 0.12s, border-color 0.12s;
+}
+.nav-q:hover { background: rgba(255,255,255,0.06); border-left-color: rgba(251,191,36,0.4); }
+.nav-q.active { background: rgba(255,255,255,0.1); border-left-color: #fbbf24; }
+.qnum { font-size: 0.7rem; font-weight: 800; color: #fbbf24; min-width: 26px; padding-top: 2px; flex-shrink: 0; }
+.qtitle { font-size: 0.81rem; color: rgba(255,255,255,0.72); line-height: 1.35; }
+.nav-q.active .qtitle { color: white; }
+
+/* MAIN */
+.main {
+  margin-left: var(--sidebar-w); flex: 1;
+  padding: 2rem 2.5rem 5rem;
+}
+
+/* WELCOME */
+.welcome {
+  background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+  border-radius: 18px; padding: 2rem 2.2rem;
+  color: white; margin-bottom: 2rem;
+  position: relative; overflow: hidden;
+}
+.welcome::after {
+  content: ''; position: absolute; top: -30px; right: -30px;
+  width: 160px; height: 160px; border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.welcome h2 { font-size: 1.35rem; margin-bottom: 0.4rem; }
+.welcome p { color: rgba(255,255,255,0.72); font-size: 0.92rem; max-width: 520px; }
+.stats { display: flex; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap; }
+.stat {
+  background: rgba(255,255,255,0.12); border-radius: 10px;
+  padding: 0.55rem 1rem; text-align: center;
+}
+.stat .num { font-size: 1.35rem; font-weight: 700; color: #fbbf24; }
+.stat .lbl { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+
+/* Q CARDS */
+.q-card {
+  background: var(--card-bg);
+  border-radius: 14px; margin-bottom: 1.5rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+.q-header {
+  background: linear-gradient(135deg, #f0fdfa 0%, #e6fffa 100%);
+  border-bottom: 1px solid rgba(15,118,110,0.12);
+  border-radius: 14px 14px 0 0;
+  padding: 1.4rem 1.8rem 1.1rem;
+}
+.q-num {
+  font-size: 0.68rem; font-weight: 800;
+  color: var(--teal); text-transform: uppercase;
+  letter-spacing: 0.09em; margin-bottom: 0.35rem;
+}
+.q-header h2 {
+  font-size: 1.02rem; font-weight: 700;
+  color: var(--teal-dark); line-height: 1.4; margin-bottom: 0.45rem;
+}
+.audience { font-style: italic; font-size: 0.84rem; color: var(--muted); }
+.q-body { padding: 1.4rem 1.8rem 1.7rem; }
+.q-body p { margin-bottom: 0.75rem; color: #2d3748; }
+.q-body h3 {
+  font-size: 0.9rem; font-weight: 700; color: var(--teal-dark);
+  margin: 1.4rem 0 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(15,118,110,0.1);
+}
+h3.bsec { color: var(--teal); }
+blockquote {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-border);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 1rem 1.2rem;
+  font-style: italic;
+  margin: 0.6rem 0 1rem;
+  font-size: 0.93rem; line-height: 1.65;
+  color: #451a03;
+}
+.fl { font-weight: 700; color: var(--teal-dark); margin: 1rem 0 0.25rem; font-size: 0.9rem; }
+.fb {
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold-border);
+  color: #4a5568; margin-bottom: 0.3rem; font-size: 0.92rem;
+}
+.itip {
+  background: #f0fdf4; border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 0.9rem 1.1rem; margin-top: 1.2rem;
+  font-size: 0.9rem; color: #14532d;
+}
+.itip span {
+  display: block; font-size: 0.68rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.09em;
+  color: #16a34a; margin-bottom: 0.3rem;
+}
+.refs {
+  margin-top: 1.4rem; background: #f9fafb;
+  border: 1px solid #e5e7eb; border-radius: 10px; padding: 1rem 1.2rem;
+}
+.refs-label {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--teal); margin-bottom: 0.5rem;
+}
+.refs ul { padding-left: 1.1rem; }
+.refs li { font-size: 0.84rem; color: var(--muted); margin-bottom: 0.2rem; }
+.kr { font-size: 0.88rem; color: var(--muted); padding-left: 1rem; margin-bottom: 0.25rem; }
+#search-info { font-size: 0.84rem; color: var(--muted); margin-bottom: 1rem; min-height: 1.2em; }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 99; }
+
+.sidebar { transition: transform 0.25s ease; }
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); width: 280px; }
+  .sidebar.open { transform: translateX(0); }
+  .overlay.open { display: block; }
+  .main { margin-left: 0; padding: 1.2rem 1rem 3rem; }
+  .menu-btn { display: block; }
+  .search-wrap { max-width: none; flex: 1; }
+  .welcome { padding: 1.4rem; border-radius: 12px; }
+  .q-header { padding: 1.1rem 1.2rem 0.9rem; }
+  .q-body { padding: 1.1rem 1.2rem 1.3rem; }
+}
+@media (min-width: 1025px) {
+  .menu-btn { display: none !important; }
+  .sidebar { transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">&#9776;</button>
+  <div class="logo">
+    <div class="logo-icon">D</div>
+    <div>
+      <div class="logo-text">Dawah Reference Guide</div>
+      <div class="logo-sub">Street Dawah Companion</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">&#128269;</span>
+    <input type="search" id="search" placeholder="Search questions..." oninput="doSearch(this.value)" />
+  </div>
+</header>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-label">Commonly Asked Questions</div>
+    <a href="#q1" class="nav-q" data-anchor="q1"><span class="qnum">Q1</span><span class="qtitle">How many times is Jesus (PBUH) mentioned in the Qura...</span></a>
+<a href="#q2" class="nav-q" data-anchor="q2"><span class="qnum">Q2</span><span class="qtitle">Which prophet is mentioned the most in the Quran?</span></a>
+<a href="#q3" class="nav-q" data-anchor="q3"><span class="qnum">Q3</span><span class="qtitle">Does Islam have Grace? How is it different from Chri...</span></a>
+<a href="#q4" class="nav-q" data-anchor="q4"><span class="qnum">Q4</span><span class="qtitle">What do you think about John 1:1, In the beginning w...</span></a>
+<a href="#q5" class="nav-q" data-anchor="q5"><span class="qnum">Q5</span><span class="qtitle">What do you think about Alpha and Omega? Does that p...</span></a>
+<a href="#q6" class="nav-q" data-anchor="q6"><span class="qnum">Q6</span><span class="qtitle">Jesus said I am the way, the truth and the life. Doe...</span></a>
+<a href="#q7" class="nav-q" data-anchor="q7"><span class="qnum">Q7</span><span class="qtitle">The Father, Son and Holy Spirit are three but one. H...</span></a>
+<a href="#q8" class="nav-q" data-anchor="q8"><span class="qnum">Q8</span><span class="qtitle">Did Jesus (PBUH) or the Bible say anything about Muh...</span></a>
+<a href="#q9" class="nav-q" data-anchor="q9"><span class="qnum">Q9</span><span class="qtitle">Was Jesus (PBUH) crucified and did he die for everyo...</span></a>
+<a href="#q10" class="nav-q" data-anchor="q10"><span class="qnum">Q10</span><span class="qtitle">What happened to Jesus (PBUH) after? Where is he now</span></a>
+<a href="#q11" class="nav-q" data-anchor="q11"><span class="qnum">Q11</span><span class="qtitle">What about Sharia Law? Isn&#x27;t it barbaric?</span></a>
+<a href="#q12" class="nav-q" data-anchor="q12"><span class="qnum">Q12</span><span class="qtitle">What do you think about Baptism?</span></a>
+<a href="#q13" class="nav-q" data-anchor="q13"><span class="qnum">Q13</span><span class="qtitle">What about Grace and Paul&#x27;s letters in the Bibl</span></a>
+<a href="#q14" class="nav-q" data-anchor="q14"><span class="qnum">Q14</span><span class="qtitle">Did Jesus (PBUH) ever claim to be God?</span></a>
+<a href="#q15" class="nav-q" data-anchor="q15"><span class="qnum">Q15</span><span class="qtitle">Does the Quran say you can hit your wife?</span></a>
+<a href="#q16" class="nav-q" data-anchor="q16"><span class="qnum">Q16</span><span class="qtitle">But the Quran confirms the previous scriptures, so d...</span></a>
+<a href="#q17" class="nav-q" data-anchor="q17"><span class="qnum">Q17</span><span class="qtitle">How can you expect to go to heaven if you don&#x27;t...</span></a>
+<a href="#q18" class="nav-q" data-anchor="q18"><span class="qnum">Q18</span><span class="qtitle">The Trinity is a fundamental truth of Christianity. ...</span></a>
+<a href="#q19" class="nav-q" data-anchor="q19"><span class="qnum">Q19</span><span class="qtitle">How can you say the Quran is preserved and the Bible...</span></a>
+<a href="#q20" class="nav-q" data-anchor="q20"><span class="qnum">Q20</span><span class="qtitle">How can we trust the Bible when it was written hundr...</span></a>
+<a href="#q21" class="nav-q" data-anchor="q21"><span class="qnum">Q21</span><span class="qtitle">If Jesus declared God is one and taught us to pray t...</span></a>
+<a href="#q22" class="nav-q" data-anchor="q22"><span class="qnum">Q22</span><span class="qtitle">Are there contradictions within the Bible itself?</span></a>
+    <div class="sidebar-label" style="margin-top:0.8rem;">Understanding the Bible</div>
+    <a href="#bible-section" class="nav-q" data-anchor="bible-section">
+      <span class="qnum">+</span><span class="qtitle">Bible structure, Gospels, translations &amp; dawah tips</span>
+    </a>
+  </nav>
+
+  <main class="main">
+    <div class="welcome">
+      <h2>Street Dawah Reference Guide</h2>
+      <p>Each answer is tailored to the most likely audience. Stay calm, be honest, and do not dodge. Click any question on the left to jump straight to it.</p>
+      <div class="stats">
+        <div class="stat"><div class="num">22</div><div class="lbl">Questions</div></div>
+        <div class="stat"><div class="num">3</div><div class="lbl">Audiences</div></div>
+        <div class="stat"><div class="num">22+</div><div class="lbl">Bible refs</div></div>
+      </div>
+    </div>
+
+    <div id="search-info"></div>
+    
+<article id="q1" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q1</div>
+    <h2>&quot;How many times is Jesus (PBUH) mentioned in the Quran?&quot;</h2>
+    <div class="audience">Most likely: Christians, but interesting to all three audiences.</div>
+  </div>
+  <div class="q-body">
+    <p>Jesus (PBUH)/Isa (PBUH) is mentioned 25 times by name, 11 times as Al-Masih (the Messiah), and several times as Ibn Maryam (Son of Mary). Prophet Muhammad (PBUH) is mentioned by name only 4 times in the entire Quran.</p>
+<p class="fl">For a Christian:</p>
+<blockquote>&quot;Jesus (PBUH) is mentioned 25 times in the Quran by name, and called the Messiah 11 times. There is an entire chapter named after Mary. The Quran speaks of his virgin birth, his miracles, and his return. We hold him in incredibly high honour. The one difference is that we see him as the greatest of God&#x27;s messengers, not as God himself.&quot;</blockquote>
+<p class="fl">For an Atheist or Agnostic:</p>
+<blockquote>&quot;The Quran actually speaks of Jesus (PBUH) more times by name than it mentions Muhammad (PBUH). It is not about rejecting Jesus (PBUH). It is about understanding who he actually was.&quot;</blockquote>
+    
+  </div>
+</article>
+
+<article id="q2" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q2</div>
+    <h2>&quot;Which prophet is mentioned the most in the Quran?&quot;</h2>
+    <div class="audience">Works for any audience.</div>
+  </div>
+  <div class="q-body">
+    <p>Moses (PBUH)/Musa (PBUH) at approximately 136 times. Abraham (PBUH) at 69, Noah (PBUH) at 43, and Jesus (PBUH) and Adam (PBUH) both around 25.</p>
+<p class="fl">For a Christian:</p>
+<blockquote>&quot;It is Moses (PBUH), not Muhammad (PBUH) and not Jesus (PBUH). About 136 times. His story covers almost every lesson that matters: standing up to a tyrant, receiving divine law, leading people through hardship. The Quran honours your prophets deeply.&quot;</blockquote>
+<p class="fl">For an Atheist:</p>
+<blockquote>&quot;Moses (PBUH), 136 times. His story is the ultimate case study in power, justice, and liberation. A man with nothing standing up to the most powerful ruler on earth, winning not through force but through God.&quot;</blockquote>
+<p class="fl">For an Agnostic:</p>
+<blockquote>&quot;Moses (PBUH) by far. What is interesting is why. His story keeps appearing because it deals with doubt, leadership under pressure, and people who witnessed miracles and still struggled to believe. The Quran is remarkably honest about that.&quot;</blockquote>
+    
+  </div>
+</article>
+
+<article id="q3" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q3</div>
+    <h2>&quot;Does Islam have Grace? How is it different from Christianity?&quot;</h2>
+    <div class="audience">Most likely: Christians.</div>
+  </div>
+  <div class="q-body">
+    <p>Christianity sees grace as God&#x27;s undeserved gift through Jesus (PBUH)&#x27;s sacrifice (Ephesians 2:8). Islam&#x27;s equivalent is Rahma -- mercy and compassion -- from the same root as Rahim (womb). Islam teaches humanity was never broken. Adam (PBUH) and Eve sinned, God forgave them directly, and no debt carried forward. Every person is born pure (fitra).</p>
+<p class="fl">For a Christian:</p>
+<blockquote>&quot;Two of God&#x27;s most repeated names are Ar-Rahman and Ar-Rahim, the Most Gracious and the Most Merciful. Every chapter of the Quran opens with those two names. God&#x27;s mercy is literally the first thing He introduces Himself with.&quot;</blockquote>
+<blockquote>&quot;The difference is that in Islam, mercy reaches you directly. No sacrifice to unlock it. You turn to God sincerely, and He responds. The Quran says God is closer to you than your own jugular vein.&quot;</blockquote>
+<blockquote>&quot;If God is all-powerful and all-merciful, why would He need a payment before He could forgive? A human judge needs a penalty paid because justice has rules outside of them. But God makes the rules. He can simply forgive. And Islam says that is exactly what He does.&quot;</blockquote>
+    
+  </div>
+</article>
+
+<article id="q4" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q4</div>
+    <h2>&quot;What do you think about John 1:1, In the beginning was the Word?&quot;</h2>
+    <div class="audience">Most likely: Christians. One of the most common verses used to argue for the divinity of Jesus (PBUH). Expect it regularly.</div>
+  </div>
+  <div class="q-body">
+    <p>John 1:1 says: &lt;i&gt;In the beginning was the Word, and the Word was with God, and the Word was God.&lt;/i&gt; The word translated as Word is the Greek Logos. Grammatically, the first two references to God use the definite article (ho theos), but the third does not. Many Greek scholars say this means &lt;i&gt;divine&lt;/i&gt; or &lt;i&gt;godlike&lt;/i&gt;, not identical to the Almighty God. John was written around 90-100 AD. The Trinity doctrine was formally defined at the Council of Nicaea in 325 AD, nearly 300 years after Jesus (PBUH).</p>
+<h3>The Islamic connection:</h3>
+<p>The Quran also calls Jesus (PBUH) the Word of God. Surah An-Nisa 4:171 calls him a Word from Him and Surah Al-Imran 3:45 describes him as a word from Allah. Islam understands this as God&#x27;s creative command &lt;i&gt;Be!&lt;/i&gt; (Kun). Jesus (PBUH) is an extraordinary creation of God, not God himself.</p>
+<h3>Three additional arguments to know:</h3>
+<p class="fl">1. It does not even prove a Trinity.</p>
+<p class="fb">Even if you accept John 1:1 completely at face value, it only mentions God and the Word. The Holy Spirit appears nowhere in the verse. The most this verse could establish is a Duality, not a Trinity.</p>
+<blockquote>&quot;Even if I take that verse exactly as it reads, it only mentions two: God and the Word. The Holy Spirit is nowhere in John 1:1. So the verse cannot establish a Trinity no matter how you read it. At most it would be a Duality. Why would the most important verse in defence of the Trinity not even mention all three?&quot;</blockquote>
+<p class="fl">2. The 2 Corinthians 4:4 double standard.</p>
+<p class="fb">The exact same Greek construction used in John 1:1 for the Word appears in 2 Corinthians 4:4 for the Devil: &lt;i&gt;the god of this world hath blinded the minds of them which believe not.&lt;/i&gt; There, translators wrote a lowercase god. In John 1:1 the same Greek is rendered as God with a capital G. That is a translation choice driven by doctrine, not by grammar.</p>
+<blockquote>&quot;The exact same Greek word used in John 1:1 for the Word appears in 2 Corinthians 4:4 for the Devil. But there it gets translated as lowercase god. Same word, different treatment. That tells you the translation was shaped by the conclusion the translator wanted to reach, not by the original Greek.&quot;</blockquote>
+<p class="fl">3. The Bible calls other humans gods too.</p>
+<p class="fb">Psalms 82:6: &lt;i&gt;I have said, ye are gods; and all of you are children of the most High.&lt;/i&gt; Exodus 7:1: God tells Moses &lt;i&gt;I have made you a god to Pharaoh.&lt;/i&gt; Jesus (PBUH) himself quoted Psalms 82:6 in John 10:34 to make this exact point.</p>
+<blockquote>&quot;The Bible uses the word god for humans elsewhere. God tells Moses in Exodus 7:1: I have made you a god to Pharaoh. Psalms 82:6 says ye are gods to ordinary people. Jesus (PBUH) himself quoted Psalms 82:6 in John 10:34. So when John 1:1 says the Word was divine, it fits perfectly within that tradition without requiring the Word to be God Almighty himself.&quot;</blockquote>
+<p class="fl">Opening response:</p>
+<blockquote>&quot;The word translated as Word is Logos in Greek, which had a very specific philosophical meaning for the Greek-speaking audience John was writing for. Interestingly, the Quran also calls Jesus (PBUH) the Word of God. We do not dispute that title at all. A word comes from a speaker. It expresses the speaker, but it is not the speaker himself.&quot;</blockquote>
+<p class="fl">If they push further:</p>
+<blockquote>&quot;Look at the same Gospel of John. In John 14:28 Jesus (PBUH) says: The Father is greater than I. In John 5:30: I can of my own self do nothing. And in John 20:17: my God and your God. He calls God his own God. How do we reconcile those with him being God himself?&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>John 14:28 -- The Father is greater than I</li>
+<li>John 5:30 -- I can of my own self do nothing</li>
+<li>John 20:17 -- My Father and your Father, my God and your God</li>
+<li>Mark 10:18 -- Why do you call me good? No one is good except God alone</li>
+<li>Mark 12:29 -- The Lord our God, the Lord is One</li>
+<li>2 Corinthians 4:4 -- Same Greek word as John 1:1 applied to the Devil (lowercase god)</li>
+<li>Psalms 82:6 / Exodus 7:1 -- Bible uses god for humans carrying divine authority</li></ul></div>
+  </div>
+</article>
+
+<article id="q5" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q5</div>
+    <h2>&quot;What do you think about Alpha and Omega? Does that prove Jesus is God?&quot;</h2>
+    <div class="audience">Most likely: Christians. Comes up regularly alongside John 1:1.</div>
+  </div>
+  <div class="q-body">
+    <p>Alpha and Omega are the first and last letters of the Greek alphabet, meaning the Beginning and the End. It appears exclusively in the Book of Revelation (1:8, 1:17-18, 21:6, 22:13). Revelation 1:8 explicitly identifies the speaker as Lord God and the Almighty -- titles for God the Father, not Jesus (PBUH). The title also already exists in the Old Testament: Isaiah 44:6 says &lt;i&gt;I am the first and the last; apart from me there is no God.&lt;/i&gt;</p>
+<h3>The Islamic connection:</h3>
+<p>Surah Al-Hadid 57:3: &lt;i&gt;He is the First and the Last, the Ascendant and the Intimate.&lt;/i&gt; Al-Awwal (The First) and Al-Akhir (The Last) are two of the 99 names of Allah. Islam agrees completely that God is the Beginning and the End.</p>
+<p class="fl">Opening response:</p>
+<blockquote>&quot;We actually love that title. The Quran says exactly the same thing in Surah Al-Hadid: He is the First and the Last. Al-Awwal and Al-Akhir are two of the names of God in Islam. We agree completely that God is the Alpha and the Omega. What I would point out is that in Revelation 1:8, the clearest use of that title, the verse itself says it belongs to Lord God, the Almighty. And the same title appears in Isaiah 44:6 centuries before Jesus (PBUH), where God says: I am the first and the last, apart from me there is no God.&quot;</blockquote>
+<p class="fl">If they point to Revelation 22:13 specifically:</p>
+<blockquote>&quot;Read three verses further. In Revelation 22:16, Jesus (PBUH) speaks again and introduces himself separately: I, Jesus, have sent my angel to give you this testimony. If he was already speaking in verse 13 as the Alpha and Omega, why does he introduce himself again as a different speaker in verse 16? Many scholars read verse 13 as God the Father and verse 16 as Jesus (PBUH) speaking as His messenger.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Revelation 1:8 -- Alpha and Omega given to Lord God, the Almighty (not Jesus)</li>
+<li>Isaiah 44:6 -- I am the first and the last; apart from me there is no God</li>
+<li>Isaiah 48:12 -- I am the first and I am the last (centuries before Jesus)</li>
+<li>Revelation 22:13 vs 22:16 -- The attribution shift many scholars note</li>
+<li>Surah Al-Hadid 57:3 -- He is the First and the Last</li></ul></div>
+  </div>
+</article>
+
+<article id="q6" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q6</div>
+    <h2>&quot;Jesus said I am the way, the truth and the life. Does that not prove he is God?&quot;</h2>
+    <div class="audience">Most likely: Christians. John 14:6 comes up frequently in dawah.</div>
+  </div>
+  <div class="q-body">
+    <p>The full verse is: &lt;i&gt;Jesus answered, I am the way and the truth and the life. No one comes to the Father except through me.&lt;/i&gt; (John 14:6). This was said privately to his disciples at the Last Supper. The verse itself makes the distinction clear: he is the way &lt;i&gt;to the Father&lt;/i&gt;. The Father is still above him and separate. A way to God is not the same as being God.</p>
+<p>John is full of these I am statements. Jesus (PBUH) also says &lt;i&gt;I am the vine&lt;/i&gt; (John 15:1), &lt;i&gt;I am the bread of life&lt;/i&gt; (John 6:35), and &lt;i&gt;I am the door&lt;/i&gt; (John 10:9). Nobody takes those as literal claims. They are metaphorical statements of purpose and role, not declarations of divinity.</p>
+<p>The same writer behind the Gospel of John also wrote Acts. In Acts 10:34-35, Peter says: &lt;i&gt;In every nation, whoever fears God and works righteousness is accepted by Him.&lt;/i&gt; That opens salvation far wider than a single verse in John suggests.</p>
+<p class="fl">Opening response:</p>
+<blockquote>&quot;That verse is actually saying he is the way to the Father. Look at the verse itself: No one comes to the Father except through me. The Father is still above and distinct. Jesus (PBUH) is pointing beyond himself toward God. That is exactly how the Quran describes him too, as one of the greatest Messengers Allah ever sent, a path to God.&quot;</blockquote>
+<p class="fl">If they say it proves Jesus is the only way:</p>
+<blockquote>&quot;John 14:6 was said privately to his disciples at the Last Supper, not as a universal decree. And Acts 10:34-35 in the same body of writing says: in every nation, whoever fears God and works righteousness is accepted by Him. That sounds much broader. How do you reconcile those two from the same author?&quot;</blockquote>
+<p class="fl">If they say the I am statements prove divinity:</p>
+<blockquote>&quot;In the same Gospel, Jesus (PBUH) also says I am the vine and I am the bread of life. Those are clearly metaphorical. The I am statements describe his role and purpose, not his nature. He is the way to God, like a door is the way into a room. The door is not the same as what is inside.&quot;</blockquote>
+<h3>The Islamic connection:</h3>
+<p>Islam agrees that Jesus (PBUH) is a way to God. He is one of the five greatest Messengers in Islam (Ulul Azm), alongside Noah, Abraham, Moses, and Muhammad (peace be upon them all). Quran 4:80: &lt;i&gt;Whoever obeys the Messenger has obeyed Allah.&lt;/i&gt;</p>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>John 14:6 -- I am the way, the truth and the life (private, Last Supper)</li>
+<li>John 15:1 -- I am the vine (metaphorical)</li>
+<li>John 6:35 -- I am the bread of life (metaphorical)</li>
+<li>Acts 10:34-35 -- In every nation, whoever fears God and works righteousness is accepted</li>
+<li>Quran 4:80 -- Whoever obeys the Messenger has obeyed Allah</li></ul></div>
+  </div>
+</article>
+
+<article id="q7" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q7</div>
+    <h2>&quot;The Father, Son and Holy Spirit are three but one. How do you respond to the Trinity?&quot;</h2>
+    <div class="audience">Most likely: Christians. The Trinity is the central belief separating Christianity from Islam. Expect it in almost every conversation.</div>
+  </div>
+  <div class="q-body">
+    <p>The word Trinity does not appear anywhere in the Bible. Not once. It was formally defined at the Council of Nicaea in 325 AD, three centuries after Jesus (PBUH). Before Nicaea, many early Christians (the Arians) believed Jesus (PBUH) was a created being, subordinate to God. The doctrine was settled by a vote at a council called by the Roman Emperor Constantine, not by the disciples or Jesus (PBUH) himself.</p>
+<p>The closest verse used to support it is 1 John 5:7 (KJV): &lt;i&gt;For there are three that bear record in heaven, the Father, the Word, and the Holy Ghost, and these three are one.&lt;/i&gt; Most modern biblical scholars acknowledge this verse was not in the original Greek manuscripts. It was added by later scribes.</p>
+<h3>Three powerful questions to ask:</h3>
+<p class="fl">First:</p>
+<p class="fb">Did Jesus (PBUH) ever say &quot;I am God, worship me&quot; anywhere in the Bible? He never did. He said worship the Lord your God (Matthew 4:10). He prayed to God. He called God his God (John 20:17). A being who is God does not pray to God.</p>
+<p class="fl">Second:</p>
+<p class="fb">If the Father and the Son are equally and fully God, why does Jesus (PBUH) say in Mark 13:32 that not even the Son knows the hour of judgment, only the Father? How can God not know something that God knows? That is not one being. That is a hierarchy.</p>
+<p class="fl">Third:</p>
+<p class="fb">In the Garden of Gethsemane, Jesus (PBUH) prayed and said &lt;i&gt;not my will, but yours be done&lt;/i&gt; (Luke 22:42). If the Father and Son are one God with one will, whose will was different from whose? Two wills means two beings.</p>
+<p class="fl">Opening response:</p>
+<blockquote>&quot;We believe in the same God you do. We just believe God is one, without partners or divisions, exactly as Jesus (PBUH) himself taught. In Mark 12:29 a scholar asked Jesus what the greatest commandment is, and he answered: Hear O Israel, the Lord our God, the Lord is One. That is pure monotheism. That is exactly what Muslims say in the Shahada. Jesus (PBUH) and Muslims are saying the same thing.&quot;</blockquote>
+<p class="fl">If they say the Trinity is a mystery beyond human understanding:</p>
+<blockquote>&quot;I respect that. But a belief that cannot be explained or understood by any human, and that Jesus (PBUH) himself never taught in those words, is worth examining carefully. God sent Prophets so we could understand Him, not so we could believe in things that contradict reason.&quot;</blockquote>
+<p class="fl">If they quote 1 John 5:7:</p>
+<blockquote>&quot;Most modern Bible translations remove that verse or add a footnote saying it does not appear in the earliest Greek manuscripts. Biblical scholars, including Christian ones, broadly agree it was added by later scribes.&quot;</blockquote>
+<h3>The Islamic position:</h3>
+<p>Surah Al-Maidah 5:73: &lt;i&gt;Surely they have disbelieved who say God is the third of three. There is no god but One God.&lt;/i&gt; Surah Al-Ikhlas (112): &lt;i&gt;Say He is Allah the One. Allah the Eternal Refuge. He neither begets nor was begotten. And there is nothing comparable to Him.&lt;/i&gt;</p>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Mark 12:29 -- Jesus (PBUH): The Lord our God, the Lord is One</li>
+<li>John 20:17 -- Jesus (PBUH): my God and your God</li>
+<li>Mark 13:32 -- Not even the Son knows the hour, only the Father (two distinct knowers)</li>
+<li>Luke 22:42 -- Not my will but yours be done (two distinct wills)</li>
+<li>Matthew 4:10 -- Jesus (PBUH): Worship the Lord your God</li>
+<li>1 John 5:7 -- Trinity verse absent from earliest Greek manuscripts; added later</li>
+<li>Quran 112:1-4 -- Surah Al-Ikhlas: He is Allah the One, He neither begets nor was begotten</li></ul></div>
+  </div>
+</article>
+
+<article id="q8" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q8</div>
+    <h2>&quot;Did Jesus (PBUH) or the Bible say anything about Muhammad (PBUH)?&quot;</h2>
+    <div class="audience">Most likely: Christians and curious non-Muslims. A powerful question to raise proactively or respond to.</div>
+  </div>
+  <div class="q-body">
+    <p>Yes. There are four clear prophecies about the coming of Muhammad (PBUH) in the Bible. Three are in the Old Testament and one is in the New Testament, spoken by Jesus (PBUH) himself.</p>
+<h3>Prophecy 1: John 14:16 and 16:7-13 (New Testament)</h3>
+<p>Jesus (PBUH) says: &lt;i&gt;And I will pray the Father, and he shall give you another Comforter, that he may abide with you forever.&lt;/i&gt; The Greek word used is Paracletos (Comforter). Many scholars believe the original word was Periclytos, meaning the praised one or the glorified one. In Arabic, the praised one is Muhammad.</p>
+<p>Three details make this remarkable. First, John 16:7: &lt;i&gt;It is to your advantage that I go away, for if I do not go away, the Comforter will not come to you.&lt;/i&gt; The Holy Spirit was already present during Jesus (PBUH)s lifetime -- requiring his physical departure only makes sense if the Comforter is another human Prophet. Second, John 16:13: &lt;i&gt;he will not speak on his own authority, but whatever he hears he will speak&lt;/i&gt; -- a precise description of how Muhammad (PBUH) received and conveyed revelation. Third, the Comforter will abide forever. The Quran has been memorised word for word by millions for over 1,400 years.</p>
+<blockquote>&quot;Jesus (PBUH) himself spoke about a Comforter coming after him in John 14 and 16. He said this person would speak only what he heard from God and would abide forever. The Quran has been memorised by millions across 1,400 years, completely unchanged. Which other scripture in history has abided like that?&quot;</blockquote>
+<h3>Prophecy 2: Song of Solomon 5:16 (Old Testament)</h3>
+<p>The English translation reads: &lt;i&gt;He is altogether lovely.&lt;/i&gt; But in the original Hebrew manuscript the word used is &lt;b&gt;Muhummedim&lt;/b&gt;. The &lt;i&gt;im&lt;/i&gt; suffix is the Hebrew plural of respect. The root word in the original text is literally Muhammad. English translators chose to render the meaning rather than transliterate the name.</p>
+<blockquote>&quot;In the original Hebrew of Song of Solomon 5:16, the word used is Muhummedim. The im at the end is a Hebrew plural of respect. The root name is Muhammad. Translators rendered it as altogether lovely instead of keeping the name. You can verify this in a Hebrew concordance.&quot;</blockquote>
+<h3>Prophecy 3: Isaiah 42:1-17 (Old Testament)</h3>
+<p>The Servant of the Lord prophecy. It mentions Kedar specifically: &lt;i&gt;Let the settlements where Kedar lives rejoice.&lt;/i&gt; Kedar is the son of Ishmael (PBUH), and Muhammad (PBUH) is the only Prophet who descended directly from Kedar. The passage says he will bring justice to all nations, matching Islam as a global message. It says &lt;i&gt;in his law the islands will put their hope&lt;/i&gt;, meaning a new law would come. It also ends with the defeat of idol worshippers, fulfilled when Muhammad (PBUH) destroyed the idols in the Kaaba.</p>
+<blockquote>&quot;Isaiah 42 mentions Kedar by name. Kedar is the son of Ishmael (PBUH) and the direct ancestor of Muhammad (PBUH). He is the only Prophet who descended from Kedar. The passage also says this servant will bring a new law and justice to all nations, not just Israel. That is Islam.&quot;</blockquote>
+<h3>Prophecy 4: Deuteronomy 18:18 (Old Testament)</h3>
+<p>God tells Moses (PBUH): &lt;i&gt;I will raise up for them a Prophet like you from among their brothers.&lt;/i&gt; The Prophet is from their brothers -- meaning the brothers of the Israelites, the Ishmaelites (Arabs), not the Israelites themselves. And Deuteronomy 34:10: &lt;i&gt;Since then, no Prophet has risen in Israel like Moses.&lt;/i&gt; Muhammad (PBUH) matches every condition: direct revelation like Moses, a new law, led a nation, from the Ishmaelite Arabs.</p>
+<blockquote>&quot;Deuteronomy 18:18 says a Prophet like Moses will rise from their brothers -- the Ishmaelites. And Deuteronomy 34:10 confirms no such Prophet rose among Israel itself. Muhammad (PBUH) came from the Ishmaelite Arabs, received direct revelation, gave a new law, and led a nation. Moses (PBUH) and Muhammad (PBUH) are the two Prophets most alike in history.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>John 14:16 -- Another Comforter coming after Jesus (PBUH)</li>
+<li>John 16:7 -- Comforter cannot come unless Jesus (PBUH) physically departs</li>
+<li>John 16:13 -- He will speak only what he hears (description of revelation)</li>
+<li>Song of Solomon 5:16 -- Muhummedim in original Hebrew manuscript</li>
+<li>Isaiah 42:1-17 -- Servant of the Lord; mentions Kedar, new law, all nations</li>
+<li>Deuteronomy 18:18 -- Prophet like Moses from their brothers (Ishmaelites)</li>
+<li>Deuteronomy 34:10 -- No Prophet like Moses arose in Israel</li></ul></div>
+  </div>
+</article>
+
+<article id="q9" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q9</div>
+    <h2>&quot;Was Jesus (PBUH) crucified and did he die for everyone&#x27;s sins?&quot;</h2>
+    <div class="audience">Most likely: Christians, especially evangelical or born-again Christians. Approach with respect.</div>
+  </div>
+  <div class="q-body">
+    <p>Islam says clearly that Jesus (PBUH) was not crucified. Allah saved him and raised him up. Even within the Bible, the concept of a man dying for another person&#x27;s sins is explicitly forbidden, and Jesus (PBUH) never once taught it himself. That doctrine came almost entirely from Paul, who never met Jesus (PBUH).</p>
+<h3>What the Quran says:</h3>
+<p>Quran 4:157-158: &lt;i&gt;They killed him not, nor crucified him, but the likeness of him was put on another man. But Allah raised him up into Himself.&lt;/i&gt; Galatians 3:13 says cursed is everyone who is hung on a tree. Islam rejects the idea that Allah&#x27;s honoured Messenger was cursed.</p>
+<h3>Argument 1: The Bible forbids dying for another&#x27;s sin.</h3>
+<p>Deuteronomy 24:16: &lt;i&gt;Parents are not to be put to death for their children, nor children for their parents. Each will die for their own sin.&lt;/i&gt; Ezekiel 18:20 repeats: &lt;i&gt;The one who sins is the one who will die.&lt;/i&gt; These are direct commands from God. The concept of a substitute bearing your punishment contradicts the Bible&#x27;s own stated principle.</p>
+<h3>Argument 2: God forbids human sacrifice.</h3>
+<p>Deuteronomy 12:31: &lt;i&gt;They even burn their sons and daughters in the fire to their gods! You must not worship the Lord your God in that way!&lt;/i&gt; God calls human sacrifice an abomination. If God condemned human sacrifice as the worst form of pagan worship, why would He require it for Himself?</p>
+<h3>Argument 3: Jesus (PBUH) never taught blood atonement.</h3>
+<p>Jesus (PBUH) taught that sins are forgiven directly through repentance and mercy, not through his death. Hosea 6:6: &lt;i&gt;I desire mercy and not sacrifice.&lt;/i&gt; Matthew 6:14: &lt;i&gt;If you forgive men their trespasses, your heavenly Father will also forgive you.&lt;/i&gt; No mention of his death being required. The blood atonement theology was developed by Paul, who admitted: &lt;i&gt;being crafty, I caught you with guile&lt;/i&gt; (2 Corinthians 12:16).</p>
+<h3>Argument 4: The Psalms say the Messiah will be saved.</h3>
+<p>Psalm 91:14-16: &lt;i&gt;Because he holds fast to me in love, I will deliver him. I will rescue him and honour him.&lt;/i&gt; Psalm 118:17: &lt;i&gt;I shall not die, but I shall live.&lt;/i&gt; The consistent pattern across the Psalms is that the Messiah is in danger, prays to God, and God saves him.</p>
+<h3>Argument 5: Jesus (PBUH) prayed to be saved and was heard.</h3>
+<p>Matthew 26:39: &lt;i&gt;My Father, if it is possible, may this cup be taken from me.&lt;/i&gt; Jesus (PBUH) is prostrating face down -- exactly as Muslims pray -- asking God to save him from death. Hebrews 5:7 confirms: &lt;i&gt;he offered up prayers and petitions with loud cries and tears to the one who could save him from death, and he was heard.&lt;/i&gt; He was heard.</p>
+<h3>Argument 6: The Sign of Jonah.</h3>
+<p>Matthew 12:39-40: &lt;i&gt;No sign will be given except the sign of the prophet Jonah. For as Jonah was three days and three nights in the belly of the fish, so the Son of Man will be three days and three nights in the heart of the earth.&lt;/i&gt; Jonah was alive inside the whale. He came out alive. The sign of Jonah is survival, not death.</p>
+<h3>Argument 7: Isaiah 53 is about Israel, not Jesus (PBUH).</h3>
+<p>The servant in Isaiah 53 is identified as Israel in the previous chapters. Isaiah 41:8: &lt;i&gt;You, Israel, my servant.&lt;/i&gt; Isaiah 43:10: &lt;i&gt;You are my witnesses and my servant whom I have chosen.&lt;/i&gt; Isaiah 49:3: &lt;i&gt;You are my servant, Israel.&lt;/i&gt; The same servant continues into chapter 53. The suffering described is Israel in Babylonian exile. There is not a single pre-Christian Jewish interpretation of Isaiah 53 as a suffering Messiah.</p>
+<h3>Argument 8: The Gospels contradict each other on the crucifixion.</h3>
+<p>What were Jesus (PBUH)&#x27;s last words? Matthew and Mark say: &lt;i&gt;My God, my God, why have you forsaken me?&lt;/i&gt; Luke says: &lt;i&gt;Father, into your hands I commit my spirit.&lt;/i&gt; John says: &lt;i&gt;It is finished.&lt;/i&gt; Who carried the cross? Matthew, Mark and Luke say Simon of Cyrene. John says Jesus (PBUH) carried it himself. What time was he crucified? Mark says the third hour (9am). John says the sixth hour (noon). And the Q source -- which Matthew and Luke both drew from -- contains no crucifixion account at all.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;We love and revere Jesus (PBUH) deeply. In Islam he is honoured in this world and the Hereafter. What I find fascinating is that even in the Bible, Deuteronomy 24:16 says no one can die for another person&#x27;s sin. Ezekiel 18:20 repeats it. Hosea 6:6 says God desires mercy, not sacrifice. And Jesus (PBUH) himself said the only sign he would give is the sign of Jonah, who came out of the whale alive. The four Gospels also give three different versions of his last words. These are honest questions worth sitting with. Islam says Allah saved Jesus (PBUH), raised him, and honoured him. That is actually a more honourable outcome for such a great Prophet.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Quran 4:157-158 -- Jesus (PBUH) was not killed nor crucified; Allah raised him</li>
+<li>Deuteronomy 24:16 -- Each person dies for their own sin; no substitute</li>
+<li>Ezekiel 18:20 -- The one who sins is the one who dies</li>
+<li>Deuteronomy 12:31 -- God calls human sacrifice an abomination</li>
+<li>Hosea 6:6 -- God desires mercy and not sacrifice</li>
+<li>Matthew 6:14 -- Forgiveness comes through forgiving others, not blood</li>
+<li>Matthew 26:39 -- Jesus (PBUH) prays face down to be saved from death</li>
+<li>Hebrews 5:7 -- He prayed to be saved from death, and he was heard</li>
+<li>Matthew 12:40 -- Sign of Jonah: three days and alive (not dead)</li>
+<li>Psalm 91:14-16 -- God promises to rescue and honour the Messiah</li>
+<li>Isaiah 53 -- Servant is Israel in Babylonian exile, not Jesus (PBUH)</li></ul></div>
+  </div>
+</article>
+
+<article id="q10" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q10</div>
+    <h2>&quot;What happened to Jesus (PBUH) after? Where is he now?&quot;</h2>
+    <div class="audience">Most likely: Christians, especially after discussing the crucifixion. A natural follow-up.</div>
+  </div>
+  <div class="q-body">
+    <p>Islam says Jesus (PBUH) was raised alive by Allah and is with Him now. He did not die. He will return to this world before the Day of Judgment. This is a foundational article of faith confirmed in both the Quran and authentic hadith.</p>
+<h3>What the Quran says:</h3>
+<p>Quran 4:157-158: &lt;i&gt;Allah raised him up unto Himself.&lt;/i&gt; Quran 3:55: &lt;i&gt;O Jesus, I will take you and raise you to Myself and purify you from those who disbelieve.&lt;/i&gt; Quran 43:61: &lt;i&gt;And indeed, Jesus will be a sign for the coming of the Hour.&lt;/i&gt;</p>
+<h3>What the hadith says about his return:</h3>
+<p>Sahih Bukhari 3448 and Sahih Muslim 155 describe the return of Jesus (PBUH) in detail. He will descend near the white minaret east of Damascus. He will decline to lead the Fajr prayer, praying behind the Muslim imam, indicating he follows the final revelation of Muhammad (PBUH). He will break the cross, end the killing of pigs, abolish the jizyah, and kill the Dajjal. He will live on earth for 40 years after his return and die a natural death, buried in Madinah next to the Prophet Muhammad (PBUH).</p>
+<h3>What the Bible says about the ascension:</h3>
+<p>Acts 1:9-11: &lt;i&gt;After he said this, he was taken up before their very eyes, and a cloud hid him from their sight. Men of Galilee, why do you stand here looking into the sky? This same Jesus, who has been taken from you into heaven, will come back in the same way you have seen him go into heaven.&lt;/i&gt; Muslims fully agree with this. Jesus (PBUH) was taken up bodily, alive, into heaven. He will return.</p>
+<h3>A point of genuine common ground:</h3>
+<p>Both Muslims and Christians believe Jesus (PBUH) is coming back. Christians believe he will return as King and Judge. Muslims believe the same. You can tell them: the Jesus (PBUH) we are waiting for is very similar to the one you are waiting for.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;Islam says Jesus (PBUH) was raised alive by Allah and is with Him now. He did not die. And he is coming back before the Day of Judgment. This is in the Quran and confirmed in the hadith. Interestingly, Acts 1:11 in the Bible says this same Jesus will come back in the same way you have seen him go into heaven. We actually agree on that. Both Muslims and Christians are waiting for the return of Jesus (PBUH). We just have a different understanding of what happened before the ascension.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Quran 4:157-158 -- Allah raised Jesus (PBUH) up unto Himself</li>
+<li>Quran 3:55 -- Allah raised Jesus (PBUH) to Himself and purified him</li>
+<li>Quran 43:61 -- Jesus (PBUH) is a sign of the coming of the Hour</li>
+<li>Sahih Bukhari 3448 / Sahih Muslim 155 -- Description of his return</li>
+<li>Acts 1:9-11 -- Taken up in a cloud alive; will return the same way</li>
+<li>Psalm 91:14-16 -- God promises to rescue and honour the Messiah</li></ul></div>
+  </div>
+</article>
+
+<article id="q11" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q11</div>
+    <h2>&quot;What about Sharia Law? Isn&#x27;t it barbaric?&quot;</h2>
+    <div class="audience">Most likely: Christians, atheists, and skeptics. Almost always based on a very partial understanding. Ask them what they think Sharia is before responding.</div>
+  </div>
+  <div class="q-body">
+    <p>Sharia is one of the most misrepresented concepts in public discourse. The word itself means the path to the watering hole in Arabic -- the path to what sustains life. It is not primarily a legal code. It is a complete way of life covering worship, family, business, ethics, and conduct. The criminal law that dominates media coverage is roughly 3 to 5 percent of the whole system.</p>
+<h3>What Sharia actually covers:</h3>
+<p>Around 80 to 85 percent is worship and personal conduct: prayer, fasting, charity, pilgrimage, how to treat your parents, neighbours, and spouse, how to conduct honest business. Around 10 to 12 percent is civil matters: marriage, divorce, inheritance, and contracts. Around 3 to 5 percent is criminal law. Judging Sharia by its criminal code alone is like judging a country by reading only its prison regulations.</p>
+<h3>On the hudud punishments:</h3>
+<p>The conditions for application are extraordinarily strict. For theft, the item must reach a specific minimum value, must have been taken from a secure place, and the person must not have been in need. For adultery, four adult witnesses must have directly witnessed the act. In 1,400 years of Islamic legal history this was almost never met. A single legal doubt is enough to suspend any hudud punishment entirely. Classical scholars would actively look for reasons to avoid applying it.</p>
+<p>The Prophet Muhammad (PBUH) said: Ward off the hudud from the Muslims as much as you can. It is better for a leader to make an error in pardoning than to make an error in punishing. And Umar ibn al-Khattab, the second Caliph, suspended the punishment for theft entirely during a year of famine, saying a hungry person cannot be punished for stealing.</p>
+<h3>How it compares to other traditions:</h3>
+<p>The Bible contains punishments far harsher than most people realise. Deuteronomy 21:18-21 commands that a rebellious son be stoned. Exodus 31:15 says working on the Sabbath is punishable by death. England had public hangings for pickpocketing until the 1800s. The United States still has the death penalty today. Harsh criminal punishment is not unique to Islam.</p>
+<h3>The deeper question:</h3>
+<p>Does God have the right to set laws for human beings? Islam says yes, and that divine law is more just than man-made law because it comes from the One who created us and knows us completely. The most just basis is the one set by the Creator, who has no personal interest, no bias, and no corruption.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;Can I ask what you think Sharia is? Most people have only seen the media coverage. Sharia actually means the path to the watering hole in Arabic, the path to what sustains life. About 85 percent of it is worship, family conduct, and business ethics. The criminal law people talk about is maybe 3 to 5 percent of the whole system. And even that part has conditions so strict that the second Caliph of Islam suspended the punishment for theft during a famine because he said a hungry person cannot be punished for stealing. The Prophet (PBUH) himself said it is better to err on the side of pardoning than punishing. That does not sound barbaric to me. That sounds like a system built on mercy.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Sharia = the path to the watering hole. 85% worship and ethics, 3-5% criminal law</li>
+<li>Hudud conditions: near-impossible standards of proof; one doubt suspends the punishment</li>
+<li>Prophet PBUH: better to err in pardoning than in punishing</li>
+<li>Umar ibn al-Khattab: suspended theft punishment during famine (Year of Ramadah, 638 CE)</li>
+<li>Bible comparison: Deuteronomy 21:18-21 (rebellious son), Exodus 31:15 (Sabbath = death)</li>
+<li>The deeper question: does God have the right to set laws for those He created?</li></ul></div>
+  </div>
+</article>
+
+<article id="q12" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q12</div>
+    <h2>&quot;What do you think about Baptism?&quot;</h2>
+    <div class="audience">Most likely: Christians, especially Catholics and evangelical Christians.</div>
+  </div>
+  <div class="q-body">
+    <p>Baptism is a water ritual used as the rite of entry into the Christian faith. The ritual actually predates Christianity: Jews had a purification practice called the mikveh, an immersion in water to achieve ritual cleanliness. John the Baptist adapted this, and people came to him as a sign of repentance. Baptism began as a sign of repentance and cleansing, nothing more.</p>
+<p>Jesus (PBUH) himself was baptised by John the Baptist in the River Jordan (Matthew 3:13-17). If Jesus (PBUH) were God, why would he need to be purified? Why would God submit to a ritual performed by a human being? He went to John, not the other way around.</p>
+<h3>Christians deeply disagree on what baptism actually means:</h3>
+<p>Catholics and Orthodox Christians believe baptism actually removes original sin and is necessary for salvation. Most Protestants believe baptism is purely symbolic. Baptists insist on full immersion only, and only for adults. There is even a dispute about the formula: Matthew 28:19 says baptise in the name of the Father, Son and Holy Spirit, but Acts 2:38 says baptise in the name of Jesus Christ only. Entire denominations split over this.</p>
+<h3>The original sin problem:</h3>
+<p>Catholic baptism is specifically designed to remove original sin -- the idea that all humans inherit Adam&#x27;s guilt. Islam completely rejects this. Every person is born in a state of pure fitrah, natural innocence. Deuteronomy 24:16: each person dies for their own sin, not another&#x27;s. Ezekiel 18:20 repeats it. The concept of inherited guilt is not supported even within the Bible itself.</p>
+<h3>The Islamic equivalent:</h3>
+<p>When someone takes the Shahada sincerely, every previous sin is wiped completely clean. No priest, no water, no intermediary. Just a direct declaration before God. The Prophet Muhammad (PBUH) said: Islam wipes out whatever came before it. A person begins with a completely clean slate.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;Baptism is interesting because it actually started as a Jewish purification ritual before Christianity. And Jesus (PBUH) himself was baptised by John the Baptist, which raises a question: if he were God, why would God need to be purified by a human? Beyond that, Catholics say baptism is necessary for salvation, Protestants say it is just a symbol, and Baptists say it must be full immersion only. Christians themselves cannot agree on what it means or even what words to use. In Islam we believe every person is born pure with no inherited sin. And if someone wants a fresh start, they simply declare their faith directly to God. No intermediary required. God hears you directly.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Matthew 3:13-17 -- Jesus (PBUH) baptised by John the Baptist (why would God need purification?)</li>
+<li>Matthew 28:19 vs Acts 2:38 -- Christians disagree on the formula for baptism itself</li>
+<li>Deuteronomy 24:16 / Ezekiel 18:20 -- No one inherits another&#x27;s sin; original sin is unbiblical</li>
+<li>Fitrah -- Every person born in a state of pure natural innocence in Islam</li>
+<li>Shahada -- Wipes all previous sins clean with no intermediary; direct connection to God</li></ul></div>
+  </div>
+</article>
+
+<article id="q13" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q13</div>
+    <h2>&quot;What about Grace and Paul&#x27;s letters in the Bible?&quot;</h2>
+    <div class="audience">Most likely: Christians, especially Protestants and evangelicals. Understanding Paul is essential because most of what Christians believe today comes from him, not from Jesus (PBUH).</div>
+  </div>
+  <div class="q-body">
+    <p>Paul wrote more of the New Testament than any other author. He never met Jesus (PBUH), never witnessed his ministry, and based his entire theology on a personal vision he claimed to have on the road to Damascus with no witnesses. Yet the core doctrines of modern Christianity -- grace, faith alone, blood atonement, and the abolition of the Law of Moses -- come almost entirely from Paul, not from Jesus (PBUH) himself.</p>
+<h3>What Paul introduced that Jesus (PBUH) never taught:</h3>
+<p>&lt;b&gt;Original sin.&lt;/b&gt; Paul built a theology from Romans 5:12 that all humanity inherits Adam&#x27;s guilt and is born fundamentally broken. But Deuteronomy 30:11-14 says: &lt;i&gt;this commandment I give you today is not too difficult for you or beyond your reach.&lt;/i&gt; God told people directly that following His law is achievable. You are not born broken.</p>
+<p>&lt;b&gt;Blood atonement.&lt;/b&gt; Romans 3:25 introduces the idea that Jesus died as a sacrifice to satisfy God&#x27;s wrath against sin. Jesus (PBUH) never said this. The parable of the prodigal son (Luke 15) shows a father forgiving a returning son with no sacrifice required.</p>
+<p>&lt;b&gt;Faith alone.&lt;/b&gt; Ephesians 2:8-9 says salvation is by grace through faith, not by works. But Jesus (PBUH) in Matthew 25 judges people entirely on what they did. And James 2:24 directly contradicts Paul: &lt;i&gt;you see that a person is justified by works and not by faith alone.&lt;/i&gt;</p>
+<p>&lt;b&gt;Abolition of the Law of Moses.&lt;/b&gt; Galatians 3:13 says Christ redeemed us from the curse of the law. But Jesus (PBUH) in Matthew 5:17-18 said: &lt;i&gt;do not think I have come to abolish the Law. Not the smallest letter will disappear from the Law until heaven and earth disappear.&lt;/i&gt;</p>
+<h3>What grace actually means and why it is problematic:</h3>
+<p>Grace in Paul&#x27;s theology means unearned, undeserved salvation given freely by God regardless of what you do. The practical implication: a person who lived a terrible life but accepted Jesus on their deathbed is saved. A person who spent their whole life in good deeds but did not accept Jesus is not saved. Islam finds this unjust because Allah is both The Most Merciful and The Most Just at the same time. Mercy without accountability is not justice.</p>
+<h3>How the grace doctrine evolved over time:</h3>
+<p>Grace as a complete theological system did not exist before Paul. The Old Testament taught covenant and accountability. Paul introduced the architecture. Then Augustine of Hippo in the 4th-5th century CE turned it into official doctrine. Martin Luther in the 16th century rediscovered Paul&#x27;s grace theology while reading Romans and sparked the Protestant Reformation. It took four people across five centuries to construct what Christians today call the foundational teaching of their faith.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;Most of what Christians believe today actually comes from Paul, not from Jesus (PBUH). Paul never met Jesus (PBUH) and admitted in his own letter that he used guile and craftiness. The idea that you are saved by grace through faith alone regardless of what you do, that Jesus died for your sins, that the Law of Moses is abolished -- none of this appears in the direct teachings of Jesus (PBUH). In Matthew 25 Jesus (PBUH) judges people on their deeds. In Matthew 5:17 he says not one letter of the Law will disappear. Islam actually preserves what Jesus (PBUH) originally taught: worship God alone, live righteously, repent sincerely, and you will be accountable for exactly what you did. That is the message every prophet from Adam to Muhammad (PBUH) brought.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>2 Corinthians 12:16 -- Paul admits: being crafty, I caught you with guile</li>
+<li>Romans 5:12 -- Paul introduces original sin (inherited guilt from Adam)</li>
+<li>Deuteronomy 30:11-14 -- God says His law is not too difficult; humans are not born broken</li>
+<li>Ephesians 2:8-9 -- Faith alone saves; works are irrelevant (Paul)</li>
+<li>Matthew 25:31-46 -- Jesus (PBUH) judges on deeds, not belief alone</li>
+<li>James 2:24 -- Justified by works and not by faith alone (directly contradicts Paul)</li>
+<li>Matthew 5:17-18 -- Jesus (PBUH): not one letter of the Law will disappear</li>
+<li>Galatians 3:13 -- Paul: Christ redeemed us from the curse of the law</li>
+<li>Grace evolved: Paul (1st C) to Augustine (5th C) to Luther (16th C)</li></ul></div>
+  </div>
+</article>
+
+<article id="q14" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q14</div>
+    <h2>&quot;Did Jesus (PBUH) ever claim to be God?&quot;</h2>
+    <div class="audience">Most likely: Christians who believe in the divinity of Jesus (PBUH). Ask them to show you one verse where Jesus (PBUH) says with his own mouth: I am God, worship me.</div>
+  </div>
+  <div class="q-body">
+    <p>No. Not once in all four Gospels does Jesus (PBUH) say &quot;I am God&quot; or instruct people to worship him. What Jesus (PBUH) said about himself consistently points in the opposite direction. The divinity doctrine comes from later writers, Paul, and a church council 300 years after him, not from Jesus (PBUH) himself.</p>
+<h3>What Jesus (PBUH) actually said about himself:</h3>
+<p>John 20:17: &lt;i&gt;I am going to my Father and your Father, to my God and your God.&lt;/i&gt; He calls God his God. God does not have a God above Him. John 14:28: &lt;i&gt;The Father is greater than I.&lt;/i&gt; Mark 12:29: The Lord our God, the Lord is one. He did not say worship me alongside God. Luke 18:19: &lt;i&gt;Why do you call me good? No one is good except God alone.&lt;/i&gt; He refused the attribute of absolute goodness which belongs only to God. John 5:30: &lt;i&gt;By myself I can do nothing.&lt;/i&gt; Mark 13:32: &lt;i&gt;Not even the Son knows the hour of Judgment, only the Father.&lt;/i&gt; Luke 13:33: Jesus (PBUH) called himself a prophet with his own words.</p>
+<h3>The most powerful verse: John 17:3</h3>
+<p>Jesus (PBUH) praying directly to God: &lt;i&gt;This is eternal life, that they know you, the only true God, and Jesus Christ whom you have sent.&lt;/i&gt; He calls God the only true God and describes himself as someone sent by God. You cannot be the only true God and also be sent by that God at the same time. In one sentence Jesus (PBUH) affirms Tawheed and his own prophethood.</p>
+<h3>Where the divinity idea actually comes from:</h3>
+<p>Three sources, none of which are Jesus (PBUH) speaking directly. First, the Gospel of John, written around 90-100 CE, sixty or more years after Jesus (PBUH), contains more elevated language than the earlier Gospels. Matthew, Mark, and Luke consistently portray Jesus (PBUH) as a human prophet. Second, Paul&#x27;s letters introduce the theology of Jesus as a divine sacrifice -- but Paul never met Jesus (PBUH). Third, the Council of Nicaea in 325 CE made divinity official doctrine by vote, over 300 years after Jesus (PBUH).</p>
+<h3>Responding to the verses Christians use:</h3>
+<p>John 10:30: &lt;i&gt;I and the Father are one.&lt;/i&gt; But four verses later in John 10:34-35, Jesus quotes Psalm 82:6 where God calls human judges gods, explaining that oneness with God does not mean being God. John 8:58: &lt;i&gt;Before Abraham was, I am.&lt;/i&gt; The context is about his pre-existence as a prophet sent by God, not a claim to being God. John 20:28: Thomas says &quot;my Lord and my God&quot; -- but this is Thomas speaking in awe, not Jesus (PBUH) saying it about himself.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;Can you show me one verse where Jesus (PBUH) says with his own mouth: I am God, worship me? Because I cannot find it. What I do find is John 17:3 where Jesus (PBUH) is praying and calls God the only true God, and describes himself as someone sent by God. I find John 20:17 where he says my God and your God. I find Mark 13:32 where he says even the Son does not know the hour, only the Father. I find Luke 18:19 where he refuses to be called good because only God is good. These are Jesus (PBUH) speaking with his own words. The divinity doctrine came 300 years later from a church council vote. Islam believes the Jesus (PBUH) of the Bible -- the one who prayed to God, called God his God, and pointed people to worship God alone. That Jesus (PBUH) never claimed to be God.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>John 17:3 -- Jesus (PBUH) calls God the only true God; describes himself as sent by God</li>
+<li>John 20:17 -- My God and your God (Jesus has a God above him)</li>
+<li>John 14:28 -- The Father is greater than I</li>
+<li>Mark 12:29 -- Jesus (PBUH) quotes Shema: The Lord our God is one</li>
+<li>Luke 18:19 -- Only God is good (Jesus refuses the absolute attribute)</li>
+<li>John 5:30 -- By myself I can do nothing</li>
+<li>Mark 13:32 -- Not even the Son knows the hour; only the Father</li>
+<li>Luke 13:33 -- Jesus (PBUH) calls himself a Prophet</li>
+<li>Council of Nicaea 325 CE -- Divinity made official doctrine by vote, 300+ years after Jesus</li></ul></div>
+  </div>
+</article>
+
+<article id="q15" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q15</div>
+    <h2>&quot;Does the Quran say you can hit your wife?&quot;</h2>
+    <div class="audience">Christians raise this theologically. Atheists and agnostics raise it as a human rights issue. Shift your angle accordingly.</div>
+  </div>
+  <div class="q-body">
+    <p>Surah An-Nisa 4:34 outlines a 3-step process for serious marital conflict. The Arabic word &lt;i&gt;idrib&lt;/i&gt; (from &lt;i&gt;daraba&lt;/i&gt;) has over 25 meanings including to strike, to separate, and to go away. Classical scholars said the third step should be symbolic only. The Prophet Muhammad (PBUH) never struck a woman and said: The best of you are those who are best to their wives.</p>
+<p class="fl">For a Christian:</p>
+<blockquote>&quot;The Arabic word has over 25 meanings and scholars have debated it for centuries. But the Prophet Muhammad (PBUH) never once raised his hand to a woman. He is the living interpretation of the Quran, and his life made the meaning clear. Islam gave women inheritance rights, the right to divorce, and their own legal identity centuries before the West did. The Quran describes marriage as built on love and mercy. That is the framework everything sits within.&quot;</blockquote>
+<p class="fl">For an Atheist or Agnostic:</p>
+<blockquote>&quot;The Prophet Muhammad (PBUH), the man who received this Quran, never struck a woman in his life. He explicitly condemned it. So even if you read the verse literally, the man it was given to rejected that reading through his own actions.&quot;</blockquote>
+    
+  </div>
+</article>
+
+<article id="q16" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q16</div>
+    <h2>&quot;But the Quran confirms the previous scriptures, so doesn&#x27;t that mean the Bible is authentic?&quot;</h2>
+    <div class="audience">Most likely: Christians, particularly well-read ones. One of the most sophisticated challenges you will face.</div>
+  </div>
+  <div class="q-body">
+    <p>This is a common and intelligent challenge. The answer rests on one key distinction: when the Quran confirms the previous scriptures, it is confirming the divine origin of the original Tawrat revealed to Moses (PBUH) and the original Injeel revealed to Jesus (PBUH). It is not certifying that what we hold in our hands today is those original revelations unchanged. The Quran also explicitly states that those scriptures were altered by human hands.</p>
+<h3>The Quran explicitly describes the corruption:</h3>
+<p>Quran 2:79: &lt;i&gt;Woe to those who write the book with their own hands, then say this is from Allah.&lt;/i&gt; God explicitly condemns people who added their own words to scripture. Quran 2:75: &lt;i&gt;A group of them used to hear the word of Allah and then alter it after they had understood it, while they knew.&lt;/i&gt; Quran 4:46 and 5:13 both state that people distort words from their proper places.</p>
+<h3>Quran 5:48 and the word criterion:</h3>
+<p>Quran 5:48: &lt;i&gt;And We have sent down to you the Book in truth, confirming what came before of the Scripture and as a criterion over it.&lt;/i&gt; The Arabic word used is &lt;b&gt;muhaymin&lt;/b&gt;, meaning a guardian, a judge, an authority over something. The Quran positions itself as the criterion that judges the previous scriptures, confirming what is true and identifying what has been changed. If the previous scriptures were perfectly preserved, there would be no need for a criterion over them.</p>
+<h3>The evidence of change is inside the Bible itself:</h3>
+<p>The explicit Trinity verse, 1 John 5:7, appears in no Greek manuscript before the 5th century -- it was added later. The ending of Mark from verse 16:9 onwards is entirely absent from the two oldest complete manuscripts, Codex Sinaiticus and Codex Vaticanus. The story of the woman taken in adultery in John 8 is also absent from the oldest manuscripts. The King James Bible contains 16 verses not found in the NIV or RSV because they were discovered to have no basis in original manuscripts. This is not a Muslim argument. It is a documented fact of biblical scholarship.</p>
+<h3>The analogy that helps:</h3>
+<p>If someone says the Mona Lisa is a masterpiece and then someone shows them a copy that has been painted over and modified across centuries, does praise of the original mean endorsement of the modified copy? Of course not. The Quran honours the divine origin of the original revelations. It does not certify that what survives today is an unchanged copy of those originals.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;The Quran confirms that God revealed the Torah and Gospel. But the Quran also says in 2:79: woe to those who write the book with their own hands and say it is from God. And in 5:48 the Quran describes itself as a criterion over the previous scriptures, meaning it judges what is authentic and what has been changed. If the previous books were perfectly preserved, no criterion would be needed. The evidence of change is actually inside the Bible itself. The Trinity verse in 1 John 5:7 was added in the 5th century. The ending of Mark from 16:9 onwards is not in the oldest manuscripts. Even Christian scholars acknowledge these facts. The Quran came to restore and confirm the original message.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Quran 5:48 -- Muhaymin: Quran as criterion and guardian over previous scriptures</li>
+<li>Quran 2:79 -- Woe to those who write the book with their own hands and say it is from God</li>
+<li>Quran 2:75 / 4:46 / 5:13 -- The Quran explicitly names the alteration of scripture</li>
+<li>1 John 5:7 -- Trinity verse absent from all Greek manuscripts before 5th century; added later</li>
+<li>Mark 16:9-20 -- Absent from Codex Sinaiticus and Codex Vaticanus (oldest complete manuscripts)</li>
+<li>John 8 -- Woman taken in adultery absent from oldest manuscripts</li>
+<li>16 KJV verses not in NIV/RSV -- removed after manuscript evidence showed they were additions</li></ul></div>
+  </div>
+</article>
+
+<article id="q17" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q17</div>
+    <h2>&quot;How can you expect to go to heaven if you don&#x27;t believe Jesus is God?&quot;</h2>
+    <div class="audience">Most likely: Evangelical and born-again Christians. A deeply personal challenge. Respond with warmth.</div>
+  </div>
+  <div class="q-body">
+    <p>The requirement to believe Jesus (PBUH) is God in order to reach heaven does not come from Jesus (PBUH) himself. It comes from Paul. Romans 10:9: &lt;i&gt;if you declare with your mouth Jesus is Lord and believe in your heart God raised him from the dead, you will be saved.&lt;/i&gt; But look at what Jesus (PBUH) himself said when people asked him directly about salvation and eternal life.</p>
+<h3>What Jesus (PBUH) actually said about salvation:</h3>
+<p>Matthew 19:16-17: A man asked Jesus what good thing must I do to get eternal life? If believing Jesus is God is the answer, this is his moment to say it. Instead he replied: &lt;i&gt;Why do you ask me about what is good? There is only One who is good. If you want to enter life, keep the commandments.&lt;/i&gt; He pointed to God and to obedience, not to himself as God.</p>
+<p>Matthew 7:21: &lt;i&gt;Not everyone who says to me Lord, Lord will enter the kingdom of heaven, but only the one who does the will of my Father.&lt;/i&gt; Calling Jesus (PBUH) Lord is explicitly not enough.</p>
+<p>Matthew 25:31-46: The most detailed description Jesus (PBUH) ever gave of Judgment Day. People enter paradise because they fed the hungry, gave water to the thirsty, clothed the naked, and visited the sick. Not a single mention of believing Jesus is God as a condition.</p>
+<p>John 17:3: Jesus (PBUH) defines eternal life while praying: &lt;i&gt;This is eternal life, that they know you, the only true God, and Jesus Christ whom you have sent.&lt;/i&gt; He calls God the only true God and describes himself as sent by God, not as God himself.</p>
+<h3>The justice argument:</h3>
+<p>What about Abraham (PBUH), Moses (PBUH), and David (PBUH)? They lived centuries before Jesus (PBUH). By the &quot;believe Jesus is God&quot; requirement, all of them are condemned. Yet Christians themselves believe Abraham is in heaven. Luke 16:22 describes a man being carried to Abraham&#x27;s bosom in paradise. And what about billions of people across history who never heard of Jesus (PBUH)? A just God cannot condemn people for not knowing something they had no access to.</p>
+<h3>Muslims do believe in Jesus (PBUH):</h3>
+<p>A Muslim cannot be a Muslim without believing in Jesus (PBUH). He is one of the five greatest prophets in Islam. We believe in his virgin birth, his miracles, his role as the Messiah, and his return before the Day of Judgment. The highest honour we can give him is to believe exactly what he said about himself: that he is a servant and messenger of God.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;I actually do believe in Jesus (PBUH) deeply. Every Muslim does. He is one of the greatest prophets, born of a virgin, performed miracles, and will return. I honour him by believing exactly what he said about himself. And when someone asked Jesus (PBUH) directly how to get eternal life in Matthew 19, he said keep the commandments and pointed to God. In Matthew 25 he described Judgment Day entirely in terms of how we treated the hungry, the sick, and the poor. He never once said believe I am God to be saved. That formula came from Paul, who never met Jesus (PBUH). I believe in God alone, I follow His commandments, and I trust in His mercy. That is the path every prophet from Abraham to Jesus to Muhammad, peace be upon them all, taught.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Matthew 19:16-17 -- Jesus (PBUH) says keep the commandments when asked about eternal life</li>
+<li>Matthew 7:21 -- Calling Jesus Lord is not enough; doing God&#x27;s will is what matters</li>
+<li>Matthew 25:31-46 -- Judgment Day based entirely on deeds; no mention of believing Jesus is God</li>
+<li>John 17:3 -- Eternal life = knowing the one true God; Jesus (PBUH) describes himself as sent by God</li>
+<li>Luke 16:22 -- Abraham is in paradise, yet he never believed Jesus is God</li>
+<li>Romans 10:9 -- The salvation formula comes from Paul, not from Jesus (PBUH)</li>
+<li>Quran 2:62 -- Salvation through sincere belief in God and righteous deeds</li></ul></div>
+  </div>
+</article>
+
+<article id="q18" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q18</div>
+    <h2>&quot;The Trinity is a fundamental truth of Christianity. Jesus is God, the Son of God.&quot;</h2>
+    <div class="audience">Most likely: Evangelical, Catholic, or mainline Protestant Christians. Keep the tone historical and factual, not confrontational.</div>
+  </div>
+  <div class="q-body">
+    <p>Ask the person: Can you show me one verse where Jesus (PBUH) himself says I am God, worship me, or I am one of three? You will find he never said these things. The doctrine of the Trinity was formally decided 300 years after Jesus (PBUH) by committees of bishops voting under pressure from Roman emperors. It was not revealed by God. It was constructed by men.</p>
+<h3>The Council of Nicaea (325 CE):</h3>
+<p>The dispute started with a priest named Arius in Alexandria, Egypt, around 318 CE. He taught that Jesus (PBUH) was the greatest creation of God but still a creation. His famous phrase: &lt;i&gt;There was a time when the Son was not.&lt;/i&gt; His bishop Alexander, and a young deacon named Athanasius, argued the opposite: that Jesus (PBUH) was fully divine and co-eternal with God. This dispute spread across the entire Christian world, causing riots and splitting churches.</p>
+<p>Emperor Constantine, who needed religious unity for his empire, called all the bishops together in Nicaea in 325 CE. He presided personally, even though he was not yet baptised at the time. Around 300 bishops voted. The position of Arius was condemned and the Nicene Creed was drafted, declaring Jesus (PBUH) to be of one substance with the Father. Arius and those who refused to sign were exiled by imperial order. This is how the divinity of Jesus (PBUH) was decided: by a vote, enforced by a Roman emperor, 300 years after Jesus (PBUH).</p>
+<h3>But Arianism did not die at Nicaea:</h3>
+<p>The losing position did not disappear. Many bishops and emperors continued to hold Arian views. Constantine himself was baptised on his deathbed by an Arian bishop. His son, Emperor Constantius II, was openly Arian. At one point the theologian Jerome wrote: &lt;i&gt;The whole world groaned and was astonished to find itself Arian.&lt;/i&gt; The official position at Nicaea was continuously contested for decades.</p>
+<h3>The Council of Constantinople (381 CE):</h3>
+<p>Fifty-six years after Nicaea, Emperor Theodosius I called a second major council in Constantinople. A new dispute had emerged: what about the Holy Spirit? A group called the Pneumatomachians accepted Nicaea&#x27;s position on Jesus (PBUH) but denied that the Holy Spirit was divine. On the other side were the Cappadocian Fathers: Basil of Caesarea, his brother Gregory of Nyssa, and Gregory of Nazianzus. They argued the Holy Spirit was fully divine, co-equal and co-eternal with the Father and the Son. The council ruled in their favour. This is the moment the Trinity doctrine became complete: Father, Son, and Holy Spirit all declared co-equal and co-eternal by vote. 350 years after Jesus (PBUH) walked the earth.</p>
+<h3>The dawah point:</h3>
+<p>Jesus (PBUH) never used the word Trinity. He never said I am of the same substance as God. These were human theological formulations assembled across two councils (325 and 381 CE), by bishops whose positions were determined largely by which emperor was in power at the time. Islam says: if you want to know who Jesus (PBUH) is, listen to what he said about himself. He called himself a prophet (Matthew 13:57). A servant of God (Acts 3:13). A son of man (Matthew 8:20, used over 80 times). He prayed to God (Mark 14:36). He said the Father is greater than I (John 14:28).</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;Can you show me where Jesus (PBUH) himself said I am God, worship me, or I am part of a Trinity? He never did. The Trinity doctrine was formally decided at the Council of Nicaea in 325 CE, 300 years after Jesus (PBUH), by bishops voting under a Roman emperor who had his own political reasons for wanting unity. The Holy Spirit was only added to the Trinity at the Council of Constantinople in 381 CE. That is 350 years after Jesus (PBUH). These were human decisions, not divine revelation. Jesus (PBUH) himself prayed to God, called himself a servant and a prophet, and said the Father is greater than I. We believe what Jesus (PBUH) said about himself.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Council of Nicaea, 325 CE -- Jesus (PBUH) declared divine by vote, 300 years after his time</li>
+<li>Council of Constantinople, 381 CE -- Holy Spirit added to Trinity, 350 years after Jesus (PBUH)</li>
+<li>Matthew 13:57 -- Jesus (PBUH) calls himself a prophet</li>
+<li>Matthew 8:20 -- Jesus (PBUH) refers to himself as son of man, used over 80 times</li>
+<li>John 14:28 -- Jesus (PBUH) says the Father is greater than I</li>
+<li>Mark 14:36 -- Jesus (PBUH) prays to God, showing he is not God himself</li>
+<li>Acts 3:13 -- Jesus (PBUH) described as God&#x27;s servant</li></ul></div>
+  </div>
+</article>
+
+<article id="q19" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q19</div>
+    <h2>&quot;How can you say the Quran is preserved and the Bible is corrupted?&quot;</h2>
+    <div class="audience">Most likely: Christians, or anyone who has been told Muslims reject the Bible entirely. Always frame it as a historical and scholarly discussion, not an attack on their faith.</div>
+  </div>
+  <div class="q-body">
+    <p>This is two questions in one. Keep them separate. First: how do we know the Quran is preserved? Second: how do we know the Bible has been changed? Always clarify: you are not saying Jesus (PBUH) was lying or that the Bible is entirely false. You are saying the original Torah revealed to Moses and the original Gospel revealed to Jesus (PBUH) were from God. What we have today is not those originals. That is not a Muslim claim. That is what Bible scholars themselves say.</p>
+<h3>Part 1: Why the Quran is uniquely preserved</h3>
+<p>The Quran has three features no other scripture in history has. &lt;b&gt;First, dual-chain transmission.&lt;/b&gt; From the very first day of revelation, the Quran was memorized AND written down simultaneously. Two parallel tracks. To corrupt the text you would have to corrupt both chains at once. No other scripture has this. &lt;b&gt;Second, the Huffaz.&lt;/b&gt; There are millions of Muslims alive today who have memorized the entire Quran word for word in its original Arabic. If anyone changed one word in the printed text, the memorizers would catch it immediately. &lt;b&gt;Third, the oldest manuscripts match.&lt;/b&gt; The Sana&#x27;a manuscripts discovered in Yemen in 1972 date to the early 600s CE. German scholar Gerd Puin examined them expecting major differences. He found almost none -- only minor spelling differences that did not affect a single word of meaning.</p>
+<h3>Allah&#x27;s own guarantee:</h3>
+<p>Quran 15:9: &lt;i&gt;Indeed, it is We who sent down the Quran and indeed We will be its guardian.&lt;/i&gt; No other scripture has this. The Bible does not contain a single verse where God says I will preserve this book forever. The Quran does. One author, one prophet, one language, one book, one version, everywhere in the world.</p>
+<h3>Part 2: What the scholars say about the Bible</h3>
+<p>There are zero original manuscripts of any New Testament book. The earliest complete New Testament copies date to 300 to 400 years after Jesus (PBUH). We are working from copies of copies of copies. In those manuscripts there are approximately 400,000 textual variants. Bart Ehrman, a former evangelical Christian and leading New Testament scholar, documented this in his book &lt;i&gt;Misquoting Jesus&lt;/i&gt;. He said there are more differences in our manuscripts than there are words in the New Testament.</p>
+<h3>The additions scholars acknowledge:</h3>
+<p>Mark 16:9-20, the resurrection appearance passage, is widely acknowledged to be a later addition. Open most modern Bibles and you will see a footnote right there saying the earliest manuscripts do not have this ending. 1 John 5:7 -- the clearest Trinity verse in the Bible -- is widely acknowledged by scholars to have been added by scribes in the 4th or 5th century. The most explicit proof of the Trinity in the entire Bible is a confirmed later addition.</p>
+<h3>The question that settles it:</h3>
+<p>Which Bible? A Catholic Bible has 73 books. A Protestant Bible has 66. They disagree on which books are the word of God. A just and wise God would not leave His final guidance as a matter of disagreement between His own followers over which books belong in it. And Jesus (PBUH) spoke Aramaic. There is not a single Aramaic Gospel in existence. Everything we have was written in Greek, by unknown authors, 40 to 100 years after Jesus (PBUH). Open any Bible and look at the Gospel titles. They say &lt;i&gt;According to Matthew&lt;/i&gt; and &lt;i&gt;According to Mark&lt;/i&gt;. The word according to is there because the authors are not confirmed. The titles were added decades later by editors.</p>
+<p class="fl">The scripted response:</p>
+<blockquote>&quot;I am not saying Jesus (PBUH) was lying or that everything in the Bible is wrong. I believe in the original Gospel that God revealed to Jesus (PBUH). I just cannot find it in any of these versions. The Bible itself has footnotes saying certain passages were added later. Christian scholars like Bart Ehrman have documented 400,000 textual variants in the manuscripts. The clearest Trinity verse in the Bible -- 1 John 5:7 -- is widely acknowledged by scholars to be a later addition. Meanwhile the Quran has been memorized by millions in its original Arabic for 1,400 years, unchanged. Allah promised in the Quran to preserve it -- and He did. The Bible does not have that promise, and the history shows why.&quot;</blockquote>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Quran 15:9 -- Allah&#x27;s promise to preserve the Quran</li>
+<li>Quran 2:23 -- The linguistic challenge: produce one chapter like it</li>
+<li>Mark 16:9-20 -- Footnote in most modern Bibles: earliest manuscripts do not include this</li>
+<li>1 John 5:7 -- The clearest Trinity verse; widely acknowledged by scholars as a later addition</li>
+<li>~400,000 textual variants in NT manuscripts (Bart Ehrman, Misquoting Jesus)</li>
+<li>Catholic Bible: 73 books. Protestant Bible: 66 books. No original Aramaic Gospels exist.</li>
+<li>Sana&#x27;a manuscripts (Yemen, 1972) -- oldest Quran fragments match modern text with no meaningful differences</li></ul></div>
+  </div>
+</article>
+
+<article id="q20" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q20</div>
+    <h2>&quot;How can we trust the Bible when it was written hundreds of years after Jesus (PBUH)?&quot;</h2>
+    <div class="audience">Works for any audience, especially Christians and agnostics who have not thought about manuscript history.</div>
+  </div>
+  <div class="q-body">
+    <p>This is one of the most important historical questions in the dialogue between Islam and Christianity. The Bible has two parts: the Old Testament, which predates Jesus (PBUH), and the New Testament, which is about him. When you look at the manuscript evidence for both, a clear pattern emerges: the documents we have came centuries after the prophets they describe.</p>
+<h3>Old Testament manuscripts</h3>
+<p>Moses (PBUH) is traditionally dated to around 1300 BC. The Torah is attributed to him, yet the oldest surviving manuscript fragments we have are the Dead Sea Scrolls, dating to approximately 250 BC to 68 AD. That is over 1,000 years after Moses (PBUH), and even then they are fragments, not a complete text.</p>
+<p>The Nash Papyrus (~150-100 BC) is a single sheet containing the Ten Commandments. Not a book. Just one page.</p>
+<p>The Aleppo Codex (~920 AD) is the oldest near-complete Hebrew Bible, over 2,200 years after Moses (PBUH). The Leningrad Codex (~1008 AD) is the oldest complete Hebrew Bible we have today, over 2,300 years after Moses (PBUH). This is the text that underpins most modern Old Testament translations.</p>
+<h3>New Testament manuscripts</h3>
+<p>Paul&#x27;s letters (~50-60 AD) are the earliest New Testament writings, not the Gospels. They were written 20 to 30 years after Jesus (PBUH). Paul never met Jesus (PBUH) during his ministry. His letters appear later in the Bible but were actually written before any Gospel.</p>
+<p>Gospel of Mark (~65-70 AD): The oldest Gospel, written 35 to 40 years after Jesus (PBUH). Jesus (PBUH) spoke Aramaic. Every manuscript we have is in Greek. No original Aramaic text survives. There was already a translation layer before a single word was written down.</p>
+<p>Gospels of Matthew and Luke (~80-90 AD): Written 50 to 60 years after Jesus (PBUH), both drawing heavily from Mark, sometimes word for word. Gospel of John (~90-100 AD): Written 60 to 70 years after Jesus (PBUH), the most theological and the most different from the other three.</p>
+<h3>The earliest surviving manuscripts</h3>
+<p>Rylands Papyrus (P52), ~125-150 AD: The oldest surviving New Testament fragment. A tiny scrap with a few verses from John 18, found in Egypt. Not a book, just a fragment.</p>
+<p>Bodmer Papyri, ~175-225 AD: Larger portions of John and Luke, still incomplete.</p>
+<p>Codex Vaticanus, ~300-325 AD: The oldest near-complete Bible, kept in the Vatican. This is 270 to 295 years after Jesus (PBUH). It is missing key passages that appear in modern Bibles, including the story of the woman caught in adultery (John 7:53-8:11) and the explicit Trinity verse (1 John 5:7).</p>
+<p>Codex Sinaiticus, ~330-360 AD: The oldest complete New Testament, found in an Egyptian monastery in the 1800s. It differs from Codex Vaticanus in over 3,000 places. Two of our oldest and most trusted manuscripts do not agree with each other.</p>
+<h3>Compare this to the Quran</h3>
+<p>The Quran was revealed to Prophet Muhammad (PBUH) over 23 years. Companions memorised it in full during his lifetime. It was written down during his lifetime and formally compiled into a single authoritative text within 20 years of his passing under Caliph Uthman (RA). The memorisation tradition has never stopped. Today there are millions of huffadh (people who have memorised the entire Quran) across the world. Every copy on earth is identical.</p>
+<p class="fl">For a Christian:</p>
+<blockquote>&quot;I have deep respect for the Bible and for Jesus (PBUH). But look at the historical record honestly. The oldest complete Hebrew Bible dates to over 2,300 years after Moses (PBUH). The oldest complete New Testament dates to 300 years after Jesus (PBUH). Two of our earliest NT manuscripts disagree in over 3,000 places. Passages in your Bible today are missing from the oldest ones. The Quran, by contrast, was memorised by thousands during the lifetime of Muhammad (PBUH), compiled within 20 years of his passing, and every copy on earth is identical. I am not asking you to reject your faith. I am asking you to apply the same historical honesty to both books.&quot;</blockquote>
+<p class="fl">For an Atheist or Agnostic:</p>
+<blockquote>&quot;You probably already know the Bible has manuscript problems. Scholars acknowledge it openly. What you may not know is how different the Quran is in this regard. It was never lost, never rediscovered in a monastery, never reconstructed from fragments. It has a 1,400-year unbroken chain of living human memory. Whatever you think of religion, that is a remarkable historical fact.&quot;</blockquote>
+<div class="itip"><span>Key point</span>Key point to land: the question is not whether the Bible contains truth. The question is whether we can be confident we have the original form of it. The manuscript evidence for both Testaments says we cannot. The Quran makes no such demand of faith because the preservation is documented and verifiable.</div>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Dead Sea Scrolls: ~250 BC-68 AD, oldest OT fragments, over 1,000 years after Moses (PBUH)</li>
+<li>Leningrad Codex: ~1008 AD, oldest complete Hebrew Bible, over 2,300 years after Moses (PBUH)</li>
+<li>Paul&#x27;s letters: ~50-60 AD, earliest NT writings, before any Gospel</li>
+<li>Gospel of Mark: ~65-70 AD, oldest Gospel, written in Greek not Aramaic</li>
+<li>Rylands Papyrus (P52): ~125-150 AD, oldest NT fragment, just a few verses</li>
+<li>Codex Vaticanus: ~300-325 AD, near-complete Bible, missing John 8 and 1 John 5:7</li>
+<li>Codex Sinaiticus: ~330-360 AD, oldest complete NT, 3,000+ differences from Vaticanus</li>
+<li>Quran compiled under Caliph Uthman (RA) within 20 years of the Prophet (PBUH)</li></ul></div>
+  </div>
+</article>
+
+<article id="q21" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q21</div>
+    <h2>&quot;If Jesus declared God is one and taught us to pray to the Father, where does the Trinity come from?&quot;</h2>
+    <div class="audience">Primarily Christians, but powerful for agnostics who have noticed the contradiction.</div>
+  </div>
+  <div class="q-body">
+    <p>This argument draws from three sources that all say the same thing: the Old Testament, the words of Jesus (PBUH) himself, and the Quran. Each one declares that God is one, undivided, and without equal. When you lay them side by side, the Trinity becomes very difficult to defend from scripture.</p>
+<h3>The Shema: the greatest commandment</h3>
+<p>Deuteronomy 6:4 contains the foundational declaration of Jewish faith, known as the Shema: &quot;Hear O Israel, the Lord our God, the Lord is one.&quot; The Hebrew word used is echad, meaning one, singular, undivided. This was not a minor verse. It was the central creed of every prophet from Moses (PBUH) onwards.</p>
+<p>Now look at Mark 12:28-29. A scribe asks Jesus (PBUH) what the greatest commandment is. His answer: &quot;The most important one is this: Hear O Israel, the Lord our God, the Lord is one.&quot; Jesus (PBUH) quotes the Shema. He does not say &quot;and I am also God.&quot; He points away from himself and declares God is one. This is the greatest commandment in his own words.</p>
+<p>Surah Al-Ikhlas (Quran 112) gives the same declaration: &quot;Say: He is Allah, the One. Allah, the eternal refuge. He neither begets nor was born, nor is there to Him any equivalent.&quot; The Quran is the explicit answer to the Trinity. The same message as the Shema, but even more direct: God does not beget, and nothing is equal to Him.</p>
+<h3>The Lord&#x27;s Prayer compared to Surah Al-Fatiha</h3>
+<p>Jesus (PBUH) taught his followers how to pray in Matthew 6:9-13. Look at who the prayer is addressed to and what it asks for:</p>
+<p class="fl">The Lord&#x27;s Prayer (Matthew 6:9-13):</p>
+<p class="fb">&quot;Our Father in heaven&quot; — addressed to God, not to Jesus (PBUH)</p>
+<p class="fb">&quot;Hallowed be your name&quot; — praising God</p>
+<p class="fb">&quot;Your will be done on earth as in heaven&quot; — submission to God&#x27;s will</p>
+<p class="fb">&quot;Give us today our daily bread&quot; — asking God for provision</p>
+<p class="fb">&quot;Forgive us our debts&quot; — seeking God&#x27;s forgiveness</p>
+<p class="fb">&quot;Deliver us from evil&quot; — seeking God&#x27;s protection</p>
+<p class="fl">Surah Al-Fatiha:</p>
+<p class="fb">&quot;In the name of Allah, the Most Gracious, the Most Merciful&quot; — God&#x27;s name and attributes</p>
+<p class="fb">&quot;All praise belongs to Allah, Lord of all worlds&quot; — praising God</p>
+<p class="fb">&quot;Master of the Day of Judgment&quot; — God&#x27;s sovereignty</p>
+<p class="fb">&quot;You alone we worship and You alone we ask for help&quot; — submission to God</p>
+<p class="fb">&quot;Guide us to the straight path&quot; — asking God for guidance and protection</p>
+<p>The structure is almost identical. Both are addressed directly to God. Neither prayer is addressed to Jesus (PBUH). In the Lord&#x27;s Prayer, Jesus (PBUH) says &quot;Our Father,&quot; placing himself alongside other worshippers, not above them. If Jesus (PBUH) were God, this prayer makes no sense. You do not pray to yourself.</p>
+<h3>What Jesus (PBUH) said about himself</h3>
+<p>The pattern holds throughout the Gospels. In Mark 10:18, Jesus (PBUH) says: &quot;Why do you call me good? No one is good except God alone.&quot; In John 14:28 he says: &quot;The Father is greater than I.&quot; In Gethsemane he prays: &quot;Not my will but yours be done,&quot; showing clearly that his will and God&#x27;s will are two separate things.</p>
+<p>In none of these moments does Jesus (PBUH) say &quot;I am God&quot; or &quot;worship me.&quot; He consistently points to the Father as greater, as the one to pray to, as the one whose will overrides his own.</p>
+<h3>Where the Trinity actually came from</h3>
+<p>The doctrine of the Trinity was not established in the lifetime of Jesus (PBUH). It was debated, contested, and formally defined at the Council of Nicaea in 325 AD, nearly 300 years after him. Before that council, many early Christians including Arius and his followers believed Jesus (PBUH) was a creation of God, not God himself. The vote at Nicaea decided the matter by church authority, not by a clear statement from Jesus (PBUH).</p>
+<p class="fl">For a Christian:</p>
+<blockquote>&quot;I want to ask you something sincerely. Jesus (PBUH) quoted the Shema as the greatest commandment: the Lord is one. He taught you to pray to the Father, not to himself. He said the Father is greater than him. He prayed asking for the Father&#x27;s will, not his own. And the Trinity was formally defined 300 years after him at a church council. At what point did Jesus (PBUH) himself teach the Trinity? I am not trying to attack your faith. I am asking you to test it against his own words.&quot;</blockquote>
+<p class="fl">For an Agnostic:</p>
+<blockquote>&quot;Even from a purely historical angle, the evidence is interesting. The Shema in Deuteronomy, the words of Jesus in the Gospels, and the Quran all say the same thing: God is one. The Trinity appears nowhere in those original sources. It was formalised at a political council three centuries later. If you are looking for what Jesus (PBUH) actually taught, his own prayers and his own words point to one God, not three.&quot;</blockquote>
+<div class="itip"><span>Key point</span>The strongest single line in this argument: &quot;Jesus said the greatest commandment is that God is one. The Trinity says God is three. Which one are we following?&quot;</div>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Deuteronomy 6:4: the Shema, &quot;the Lord our God, the Lord is one&quot;</li>
+<li>Mark 12:28-29: Jesus (PBUH) quotes the Shema as the greatest commandment</li>
+<li>Mark 10:18: &quot;No one is good except God alone&quot;</li>
+<li>John 14:28: &quot;The Father is greater than I&quot;</li>
+<li>Matthew 6:9-13: the Lord&#x27;s Prayer addressed to the Father</li>
+<li>Quran 112 (Surah Al-Ikhlas): &quot;He is Allah, the One... He neither begets nor was born&quot;</li>
+<li>Council of Nicaea, 325 AD: Trinity formally defined, 300 years after Jesus (PBUH)</li></ul></div>
+  </div>
+</article>
+
+<article id="q22" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q22</div>
+    <h2>&quot;Are there contradictions within the Bible itself?&quot;</h2>
+    <div class="audience">Works for any audience. Especially useful with Christians who have not studied manuscript history, and agnostics who assume the Bible is internally consistent.</div>
+  </div>
+  <div class="q-body">
+    <p>Yes, and these are not minor translation issues. They are direct contradictions between books on major events. Christian scholars acknowledge most of these openly. The question for dawah is not whether the Bible contains truth, but whether the text we have today is reliable and preserved in its original form.</p>
+<h3>The death of Judas</h3>
+<p>Matthew 27:5 says Judas &quot;went away and hanged himself.&quot; Acts 1:18 says &quot;he fell headlong, his body burst open and all his intestines spilled out.&quot; Two completely different deaths. Acts also says Judas himself bought a field with the money. Matthew says he threw the money back and the priests bought the field after his death. Same event, same person, four different details across two books.</p>
+<h3>The resurrection accounts</h3>
+<p>The resurrection is the foundation of Christianity, yet the four Gospels contradict each other on almost every detail of that morning.</p>
+<p class="fl">Who went to the tomb?</p>
+<p class="fb">Matthew 28:1: Mary Magdalene and &quot;the other Mary&quot;</p>
+<p class="fb">Mark 16:1: Mary Magdalene, Mary the mother of James, and Salome</p>
+<p class="fb">Luke 24:10: Mary Magdalene, Joanna, Mary the mother of James, and others</p>
+<p class="fb">John 20:1: Mary Magdalene alone</p>
+<p class="fl">What did they find there?</p>
+<p class="fb">Matthew 28:2: One angel sitting outside on the rolled-away stone</p>
+<p class="fb">Mark 16:5: One young man sitting inside the tomb</p>
+<p class="fb">Luke 24:4: Two men standing inside</p>
+<p class="fb">John 20:12: Two angels sitting inside</p>
+<p class="fl">Who did Jesus (PBUH) appear to first?</p>
+<p class="fb">Matthew and John: Mary Magdalene</p>
+<p class="fb">Luke: Two disciples on the road to Emmaus, no appearance to women mentioned</p>
+<p>Four Gospels. Four different accounts of the single most important moment in the faith. If these were eyewitness records, they would not differ this significantly on who was present, what was seen, and who Jesus (PBUH) appeared to first.</p>
+<h3>The genealogy of Jesus (PBUH)</h3>
+<p>Matthew 1 and Luke 3 both trace the ancestry of Jesus (PBUH) through Joseph. Matthew goes from David through his son Solomon. Luke goes from David through a completely different son, Nathan. From that point the two lists share almost no names and give different numbers of generations. They cannot both be correct. And if Jesus (PBUH) was born of a virgin, the genealogy of Joseph is irrelevant in either case.</p>
+<h3>Luke contradicting himself</h3>
+<p>Luke wrote both the Gospel of Luke and the Book of Acts. In Luke 24:51, the ascension of Jesus (PBUH) happens on Easter Sunday, the same day as the resurrection appearances. In Acts 1:3, Luke says Jesus (PBUH) appeared to the disciples for 40 days before ascending. The same author, two different books, contradicting each other on when the ascension occurred.</p>
+<h3>Paul&#x27;s conversion</h3>
+<p>Acts 9:7 says the men travelling with Paul &quot;heard the voice but saw no one.&quot; Acts 22:9 says they &quot;saw the light but did not hear the voice.&quot; Heard it but did not see, or saw it but did not hear. The same event, the same book, two directly opposite accounts only thirteen chapters apart.</p>
+<h3>How to use this in dawah</h3>
+<p>The resurrection contradictions are the strongest because a Christian cannot dismiss them as minor. If four accounts of the most important event in history cannot agree on who was there, what they saw, and who Jesus (PBUH) appeared to first, that raises a serious and honest question about reliability.</p>
+<p>The Judas contradiction is easier to remember and lands quickly in conversation. Lead with that, then mention the resurrection if they push back.</p>
+<p>Always frame this with respect. The goal is not to mock the Bible or embarrass anyone. The goal is to show that the text we have today has passed through many human hands and contains the fingerprints of those hands.</p>
+<p class="fl">For a Christian:</p>
+<blockquote>&quot;I want to ask you something honestly and with respect. Matthew says Judas hanged himself. Acts says he fell and burst open. Matthew says two women went to the tomb. John says only one. Luke says the ascension was on Easter Sunday. Acts, also written by Luke, says it was 40 days later. These are not translation differences. They are different accounts of the same events. I am not saying the Bible has no truth in it. I am asking: if these differences exist in what we have today, how confident can we be that we have the original? That is the question.&quot;</blockquote>
+<p class="fl">For an Agnostic:</p>
+<blockquote>&quot;Most people assume the Bible is at least internally consistent. It is not. Scholars have known this for centuries. The death of Judas, the resurrection accounts, the genealogy of Jesus, the date of the ascension: all of these have direct contradictions within the text itself. This is not an Islamic argument. It is a historical and textual one that Biblical scholars themselves make.&quot;</blockquote>
+<div class="itip"><span>Key point</span>Key point to remember: these contradictions exist within the Bible itself, before any comparison to Islam or the Quran. You are not attacking the Bible from outside. You are asking the reader to look honestly at what is already there.</div>
+    <div class="refs"><div class="refs-label">Key references</div><ul><li>Matthew 27:5 vs Acts 1:18: two different accounts of how Judas died</li>
+<li>Matthew 28:1, Mark 16:1, Luke 24:10, John 20:1: who went to the tomb</li>
+<li>Matthew 28:2, Mark 16:5, Luke 24:4, John 20:12: what was found at the tomb</li>
+<li>Matthew 1 vs Luke 3: two incompatible genealogies of Jesus (PBUH)</li>
+<li>Luke 24:51 vs Acts 1:3: ascension on Easter Sunday vs 40 days later</li>
+<li>Acts 9:7 vs Acts 22:9: Paul&#x27;s companions heard the voice vs did not hear it</li></ul></div>
+  </div>
+</article>
+
+<article id="bible-section" class="q-card">
+  <div class="q-header">
+    <div class="q-num">Reference</div>
+    <h2>Understanding the Bible</h2>
+    <div class="audience">For you, not for debate. The more you know, the more effective your conversations will be.</div>
+  </div>
+  <div class="q-body">
+
+    <h3>The Bible at a glance</h3>
+    <p>The Bible is two major collections bound into one book. Christians use both. Jews use only the first. Muslims share a large part of the same history, prophets, and stories.</p>
+    <p><strong>The Old Testament</strong> is the Jewish scripture adopted by Christianity. It covers creation, the prophets, the laws given to Moses (PBUH), and the history of the Israelites. Adam (PBUH), Noah (PBUH), Abraham (PBUH), Moses (PBUH), David (PBUH), Solomon (PBUH) are all here. This is your common ground.</p>
+    <p><strong>The New Testament</strong> is specifically Christian, beginning with Jesus (PBUH). This is where Christianity diverges from both Judaism and Islam.</p>
+
+    <h3>Structure of the Old Testament</h3>
+    <p><strong>Torah (Pentateuch)</strong> — The five books of Moses (PBUH): Genesis, Exodus, Leviticus, Numbers, Deuteronomy. Genesis covers creation, Adam (PBUH) and Eve, Noah (PBUH), and Abraham (PBUH). Exodus covers Moses (PBUH) and Pharaoh. Start here for common ground.</p>
+    <p><strong>Historical Books</strong> — History of Israel: kings, wars, rise and fall of the kingdom. Joshua, Judges, Samuel, Kings.</p>
+    <p><strong>Wisdom and Poetry Books</strong> — Psalms (the Bible&#39;s prayer book), Proverbs, Ecclesiastes, Job. Christians quote Psalms heavily in worship. Acknowledging their beauty builds warmth.</p>
+    <p><strong>Prophetic Books</strong> — Isaiah, Jeremiah, Ezekiel, Daniel, and twelve Minor Prophets. Isaiah 42 is where Muslims point to the prophecy of Muhammad (PBUH). Know this chapter well.</p>
+
+    <h3>Structure of the New Testament</h3>
+    <p><strong>The Four Gospels</strong> — Matthew, Mark, Luke, John. Written accounts of the life of Jesus (PBUH) from different authors for different audiences. The most important section to know.</p>
+    <p><strong>Acts of the Apostles</strong> — History of the early church after Jesus (PBUH).</p>
+    <p><strong>The Epistles (Letters)</strong> — 21 letters, most written by Paul. Critical point: most Christian theology about the Trinity, original sin, grace, and salvation comes from Paul&#39;s letters, not from the words of Jesus (PBUH) himself. Paul never met Jesus (PBUH) in person during his ministry.</p>
+    <p><strong>Revelation</strong> — A symbolic apocalyptic book about the end of times. Heavily debated even among Christians.</p>
+
+    <h3>The four Gospels in detail</h3>
+    <p><strong>Matthew (~80-90 AD)</strong> — Written for a Jewish audience. Constantly quotes Old Testament prophecy to argue Jesus (PBUH) fulfils what the prophets promised. Contains the Sermon on the Mount and the Lord&#39;s Prayer.</p>
+    <p><strong>Mark (~65-70 AD)</strong> — The earliest Gospel, shortest and most action-focused, written for a Roman audience. Has no birth narrative at all. Jesus (PBUH) simply appears as an adult. The earliest account shows no concept of divine pre-existence.</p>
+    <p><strong>Luke (~80-85 AD)</strong> — The most detailed and compassionate account, written by a physician. Gives the fullest birth narrative. Also covers Zachariah and the birth of John the Baptist, which the Quran covers in Surah Maryam.</p>
+    <p><strong>John (~90-100 AD)</strong> — Written last, the most theologically complex. Source of most arguments for the divinity of Jesus (PBUH), including John 1:1. But also contains the clearest statements from Jesus (PBUH) pointing away from divinity. Know both sides of John well.</p>
+    <p>Matthew, Mark, and Luke are called the Synoptic Gospels because they share a similar structure. John stands apart, written decades later, far more mystical and theological.</p>
+
+    <h3>Bible translations: NIV, KJV and others</h3>
+    <p><strong>KJV (King James Version, 1611)</strong> — Formal, poetic English. Still used in traditional churches.</p>
+    <p><strong>NIV (New International Version, 1978/2011)</strong> — Modern, readable English. The most widely sold Bible today. What most Christians use in casual conversation.</p>
+    <p><strong>ESV (English Standard Version)</strong> — More literal, word-for-word. Popular among conservative Protestants and scholars.</p>
+    <p><strong>NLT (New Living Translation)</strong> — Written almost as a paraphrase. Easy to read but less precise for theological arguments.</p>
+    <div class="itip"><span>Tip</span>When a Christian quotes a verse, ask which translation they are using. The wording can differ enough to change the conversation.</div>
+
+    <h3>Key dawah takeaways from the Bible</h3>
+    <p>Jesus (PBUH) never used the word Trinity. It does not appear anywhere in the Bible. The doctrine was formally defined 300 years after him at the Council of Nicaea in 325 AD.</p>
+    <p>Paul, not Jesus (PBUH), is the source of most Christian theology. Original sin, grace, salvation through the cross: these come from Paul&#39;s letters. Paul never met Jesus (PBUH) in person during his ministry.</p>
+    <p>Mark, the earliest Gospel, has no divine birth narrative. The theology around Jesus (PBUH)&#39;s divine nature developed over decades. By the time John was written, the language had become far more mystical.</p>
+    <p>Genesis is your strongest common ground. Both you and a Christian believe in creation, Adam (PBUH) and Eve, Noah (PBUH), and Abraham (PBUH). Start there, not with differences.</p>
+    <p>Isaiah is a bridge book. Christians see it as full of prophecies about Jesus (PBUH). Muslims use Isaiah 42 to point to Muhammad (PBUH). Knowing Isaiah gives you a unique angle.</p>
+    <p>The Psalms are the Bible&#39;s prayer book. Many Christians know them by heart. Acknowledging their beauty builds warmth and earns you the right to be heard.</p>
+    <div class="itip"><span>Remember</span>Know their book well enough to honour it. That earns you the right to be heard. Always lead with the gift. Listen more than you speak. Meet people where they are.</div>
+
+  </div>
+</article>
+  </main>
+</div>
+
+<script>
+var cards = document.querySelectorAll('.q-card');
+var navLinks = document.querySelectorAll('.nav-q[data-anchor]');
+
+function doSearch(val) {
+  var term = val.trim().toLowerCase();
+  var info = document.getElementById('search-info');
+  var count = 0;
+  cards.forEach(function(c) {
+    if (!term || c.innerText.toLowerCase().includes(term)) {
+      c.style.display = ''; count++;
+    } else {
+      c.style.display = 'none';
+    }
+  });
+  info.textContent = term ? count + ' result' + (count !== 1 ? 's' : '') + ' for "' + val + '"' : '';
+}
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      navLinks.forEach(function(l) { l.classList.remove('active'); });
+      var link = document.querySelector('.nav-q[data-anchor="' + entry.target.id + '"]');
+      if (link) { link.classList.add('active'); link.scrollIntoView({block:'nearest'}); }
+    }
+  });
+}, { rootMargin: '-10% 0px -75% 0px' });
+
+cards.forEach(function(c) { observer.observe(c); });
+
+navLinks.forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var target = document.getElementById(this.getAttribute('data-anchor'));
+    if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (window.innerWidth <= 768) closeSidebar();
+  });
+});
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+</script>
+</body>
+</html>
